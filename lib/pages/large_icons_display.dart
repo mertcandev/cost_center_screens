@@ -1,6 +1,5 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, sized_box_for_whitespace
 
-import 'package:cost_center_screens/pages/list_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +10,51 @@ import 'package:cost_center_screens/utils.dart';
 enum ExpenseIncomePick { expense, income }
 enum BottomBarTimePick { d, w, m, y }
 
+Map<String, double> chartMap = {
+  "Personal": 100,
+  "Work": 150,
+  "Family": 170,
+  "My Project": 200
+};
+
+List<Color> colorList = [
+  Utils.kChartPersonalColor,
+  Utils.kChartWorkColor,
+  Utils.kChartFamilyColor,
+  Utils.kChartMyProjectColor
+];
+
+List<Map> folderDetails = [
+  {
+    "color": Utils.kExpenseFolderAccentColor,
+    "boldText": "Total Spending",
+    "folderBoldMoney": "100000",
+    "folderMoney": "10000",
+    "progressBarValue": 0.5
+  },
+  {
+    "color": Utils.kExpenseFolderAccentColor,
+    "boldText": "Personal Spending",
+    "folderBoldMoney": "100000",
+    "folderMoney": "10000",
+    "progressBarValue": 0.5
+  },
+  {
+    "color": Utils.kExpenseFolderColor,
+    "boldText": "Family Expenses",
+    "folderBoldMoney": "100000",
+    "folderMoney": "10000",
+    "progressBarValue": 0.5
+  },
+  {
+    "color": Utils.kExpenseFolderColor,
+    "boldText": "My Project",
+    "folderBoldMoney": "100000",
+    "folderMoney": "10000",
+    "progressBarValue": 0.5
+  }
+];
+
 class LargeIconsDisplay extends StatefulWidget {
   const LargeIconsDisplay({Key? key}) : super(key: key);
 
@@ -19,20 +63,6 @@ class LargeIconsDisplay extends StatefulWidget {
 }
 
 class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
-  Map<String, double> chartMap = {
-    "Personal": 100,
-    "Work": 150,
-    "Family": 170,
-    "My Project": 200
-  };
-
-  List<Color> colorList = [
-    Utils.kChartPersonalColor,
-    Utils.kChartWorkColor,
-    Utils.kChartFamilyColor,
-    Utils.kChartMyProjectColor
-  ];
-
   final String avatarImgPath = "assets/avatar.jpg";
   final String headerButtonText = "USD";
   final String searchBarText = "Looking for something...";
@@ -41,25 +71,15 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
   final String spendingDate = "Mar 22";
   final double bottomTimePickingLargeWidth = 77.w;
   final double bottomTimePickingSmallWidth = 57.w;
-  final String folderBoldText = "Total Spending";
-  final String folderBoldMoney = "100000";
-  final String folderMoney = "10000";
 
   ExpenseIncomePick _selectedEI = ExpenseIncomePick.expense;
   BottomBarTimePick _selectedTime = BottomBarTimePick.d;
-
-  final double progressBarValue = 0.5;
+  bool notificationVisibility = true;
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(builder: (context) {
       return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ListDisplay()));
-          },
-        ),
         backgroundColor: Utils.kBackgroundColor,
         body: Column(
           children: [
@@ -69,19 +89,42 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(right: 30.w),
-                    child: Container(
-                      height: 36.h,
-                      width: 36.w,
-                      decoration: BoxDecoration(
-                          image:
-                              DecorationImage(image: AssetImage(avatarImgPath)),
-                          shape: BoxShape.circle),
-                    ),
-                  ),
+                      padding: EdgeInsets.only(right: 30.w),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 36.h,
+                            width: 36.w,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(avatarImgPath)),
+                                shape: BoxShape.circle),
+                          ),
+                          Positioned(
+                              right: 1.5,
+                              top: 1.5,
+                              child: Visibility(
+                                  visible: notificationVisibility,
+                                  child: Container(
+                                    height: 8.h,
+                                    width: 8.w,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white),
+                                    child: Center(
+                                        child: Container(
+                                      height: 6.h,
+                                      width: 6.w,
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0xffFF5247)),
+                                    )),
+                                  )))
+                        ],
+                      )),
                   Text("Swipe",
                       style: GoogleFonts.poppins(
-                          fontSize: 20.h, fontWeight: FontWeight.w700)),
+                          fontSize: 20.h, fontWeight: FontWeight.w500)),
                   Container(
                     height: 32.h,
                     width: 66.w,
@@ -130,68 +173,65 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        totalSpendingText,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                            fontSize: 11.h,
-                            fontWeight: FontWeight.w400,
-                            color: Utils.kSpentTextColor),
-                      ),
-                      Text(
-                        totalSpentMoney,
-                        style: GoogleFonts.poppins(
-                            fontSize: 32.h,
-                            color: Utils.kSpentTextColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            spendingDate,
-                            style: GoogleFonts.poppins(fontSize: 11),
-                          ),
-                          const SizedBox(width: 5),
-                          Icon(
-                            Icons.work,
-                            color: Utils.kSpentTextColor,
-                            size: 13.h,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: SizedBox(
-                      height: 200.h,
-                      width: 200.h,
-                      child: PieChart(
-                        chartType: ChartType.ring,
-                        dataMap: chartMap,
-                        colorList: colorList,
-                        chartRadius: 130.h,
-                        ringStrokeWidth: 55,
-                        legendOptions: const LegendOptions(showLegends: false),
-                        chartValuesOptions:
-                            const ChartValuesOptions(showChartValues: false),
-                        animationDuration: const Duration(seconds: 2),
-                        centerText: "Top 3",
-                        centerTextStyle: GoogleFonts.poppins(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                            color: Utils.kChartCenterTextColor),
-                      ),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      totalSpendingText,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 11.h,
+                          fontWeight: FontWeight.w400,
+                          color: Utils.kSpentTextColor),
                     ),
-                  )
-                ]),
-              ),
+                    Text(
+                      totalSpentMoney,
+                      style: GoogleFonts.poppins(
+                          fontSize: 32.h,
+                          color: Utils.kSpentTextColor,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          spendingDate,
+                          style: GoogleFonts.poppins(fontSize: 11.h),
+                        ),
+                         SizedBox(width: 5.w),
+                        CustomPaint(
+                          size: const Size(15, 13),
+                          painter: BagIconPainter(),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: SizedBox(
+                    height: 150.h,
+                    width: 150.h,
+                    child: PieChart(
+                      chartType: ChartType.ring,
+                      dataMap: chartMap,
+                      colorList: colorList,
+                      chartRadius: 100.h,
+                      ringStrokeWidth: 40.h,
+                      legendOptions: const LegendOptions(showLegends: false),
+                      chartValuesOptions:
+                          const ChartValuesOptions(showChartValues: false),
+                      animationDuration: const Duration(seconds: 3),
+                      centerText: "Top 3",
+                      centerTextStyle: GoogleFonts.poppins(
+                          fontSize: 11.h,
+                          fontWeight: FontWeight.w400,
+                          color: Utils.kChartCenterTextColor),
+                    ),
+                  ),
+                )
+              ]),
             ),
             Padding(
               padding: EdgeInsets.only(top: 15.h, bottom: 20.h),
@@ -300,282 +340,37 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                 context: context,
                 removeTop: true,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 19.w, left: 19.w),
-                  child: GridView(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: GridView.builder(
+                    itemCount: folderDetails.length,
                     physics: const BouncingScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: 39.h, left: 18.w, bottom: 13),
-                        child: CustomPaint(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 39.h, left: 18.w, bottom: 13),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  folderBoldText,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderBoldMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                const Spacer(),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 10.h,
-                                        width: 75.w,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: LinearProgressIndicator(
-                                          color: Utils
-                                              .kExpenseFolderIndicatorColor,
-                                          backgroundColor: Colors.white,
-                                          value: progressBarValue,
-                                        ),
-                                      ),
-                                      SizedBox(width: 15.w),
-                                      Text(
-                                        "${(progressBarValue * 100).toInt()} %",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w700,
-                                            color: Utils
-                                                .kExpenseFolderIndicatorColor),
-                                      )
-                                    ])
-                              ],
-                            ),
-                          ),
-                          painter: FolderPainter(
-                              folderFillColor: Utils.kExpenseFolderAccentColor),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: 39.h, left: 18.w, bottom: 13),
-                        child: CustomPaint(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 39.h, left: 18.w, bottom: 13),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  folderBoldText,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderBoldMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                const Spacer(),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 10.h,
-                                        width: 75.w,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: LinearProgressIndicator(
-                                          color: Utils
-                                              .kExpenseFolderIndicatorColor,
-                                          backgroundColor: Colors.white,
-                                          value: progressBarValue,
-                                        ),
-                                      ),
-                                      SizedBox(width: 15.w),
-                                      Text(
-                                        "${(progressBarValue * 100).toInt()} %",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w700,
-                                            color: Utils
-                                                .kExpenseFolderIndicatorColor),
-                                      )
-                                    ])
-                              ],
-                            ),
-                          ),
-                          painter: FolderPainter(
-                              folderFillColor: Utils.kExpenseFolderAccentColor),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: 13.h, left: 18.w, bottom: 13),
-                        child: CustomPaint(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 39.h, left: 18.w, bottom: 13),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  folderBoldText,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderBoldMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                const Spacer(),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 10.h,
-                                        width: 75.w,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: LinearProgressIndicator(
-                                          color: Utils
-                                              .kExpenseFolderIndicatorColor,
-                                          backgroundColor: Colors.white,
-                                          value: progressBarValue,
-                                        ),
-                                      ),
-                                      SizedBox(width: 15.w),
-                                      Text(
-                                        "${(progressBarValue * 100).toInt()} %",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w700,
-                                            color: Utils
-                                                .kExpenseFolderIndicatorColor),
-                                      )
-                                    ])
-                              ],
-                            ),
-                          ),
-                          painter: FolderPainter(
-                              folderFillColor: Utils.kExpenseFolderColor),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: 13.h, left: 18.w, bottom: 13),
-                        child: CustomPaint(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 39.h, left: 18.w, bottom: 13),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  folderBoldText,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderBoldMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  folderMoney,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Utils.kExpenseFolderTextColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                const Spacer(),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 10.h,
-                                        width: 75.w,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: LinearProgressIndicator(
-                                          color: Utils
-                                              .kExpenseFolderIndicatorColor,
-                                          backgroundColor: Colors.white,
-                                          value: progressBarValue,
-                                        ),
-                                      ),
-                                      SizedBox(width: 15.w),
-                                      Text(
-                                        "${(progressBarValue * 100).toInt()} %",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w700,
-                                            color: Utils
-                                                .kExpenseFolderIndicatorColor),
-                                      )
-                                    ])
-                              ],
-                            ),
-                          ),
-                          painter: FolderPainter(
-                              folderFillColor: Utils.kExpenseFolderColor),
-                        ),
-                      ),
-                    ],
+                            childAspectRatio: 1.115, crossAxisCount: 2),
+                    itemBuilder: (BuildContext ctx, index) {
+                      return ExpenseFolder(
+                          folderFillColor: folderDetails[index]["color"],
+                          folderBoldText: folderDetails[index]["boldText"],
+                          folderBoldMoney: folderDetails[index]
+                              ["folderBoldMoney"],
+                          folderMoney: folderDetails[index]["folderMoney"],
+                          progressBarValue: folderDetails[index]
+                              ["progressBarValue"]);
+                    },
                   ),
                 ),
               ),
             )
           ],
         ),
-        bottomNavigationBar: SizedBox(
+        bottomNavigationBar: Container(
           height: 86.h,
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 2,
+                spreadRadius: 1),
+          ]),
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -603,7 +398,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                       child: Center(
                           child: Text("Expense",
                               style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 12.h,
                                   fontWeight: FontWeight.w700,
                                   color: _selectedEI ==
                                           ExpenseIncomePick.expense
@@ -634,7 +429,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                       child: Center(
                           child: Text("Income",
                               style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 12.h,
                                   fontWeight: FontWeight.w700,
                                   color: _selectedEI == ExpenseIncomePick.income
                                       ? Utils
@@ -674,7 +469,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                           child: Text(
                         "D",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.d
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -704,7 +499,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                           child: Text(
                         "W",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.w
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -734,7 +529,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                           child: Text(
                         "M",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.m
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -767,7 +562,7 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
                           child: Text(
                         "Y",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.y
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -782,6 +577,92 @@ class _LargeIconsDisplayState extends State<LargeIconsDisplay> {
         ),
       );
     });
+  }
+}
+
+class ExpenseFolder extends StatefulWidget {
+  const ExpenseFolder(
+      {Key? key,
+      required this.folderBoldText,
+      required this.folderBoldMoney,
+      required this.folderMoney,
+      required this.progressBarValue,
+      required this.folderFillColor})
+      : super(key: key);
+
+  final String folderBoldText;
+  final String folderBoldMoney;
+  final String folderMoney;
+  final double progressBarValue;
+  final Color folderFillColor;
+
+  @override
+  State<ExpenseFolder> createState() => _ExpenseFolderState();
+}
+
+class _ExpenseFolderState extends State<ExpenseFolder> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 9.w, right: 9.w, bottom: 13.h),
+      child: CustomPaint(
+        child: Padding(
+          padding: EdgeInsets.only(top: 39.h, left: 18.w, bottom: 16.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.folderBoldText,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.poppins(
+                    fontSize: 12.h,
+                    color: Utils.kExpenseFolderTextColor,
+                    fontWeight: FontWeight.w700),
+              ),
+              Text(
+                widget.folderBoldMoney,
+                style: GoogleFonts.poppins(
+                    fontSize: 12.h,
+                    color: Utils.kExpenseFolderTextColor,
+                    fontWeight: FontWeight.w700),
+              ),
+              Text(
+                widget.folderMoney,
+                style: GoogleFonts.poppins(
+                    fontSize: 9.h,
+                    color: Utils.kExpenseFolderTextColor,
+                    fontWeight: FontWeight.w400),
+              ),
+              const Spacer(),
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Container(
+                  height: 10.h,
+                  width: 75.w,
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: LinearProgressIndicator(
+                    color: Utils.kExpenseFolderIndicatorColor,
+                    backgroundColor: Colors.white,
+                    value: widget.progressBarValue.toDouble(),
+                  ),
+                ),
+                SizedBox(width: 15.w),
+                Text(
+                  "${(widget.progressBarValue * 100).toInt()} %",
+                  style: GoogleFonts.poppins(
+                      fontSize: 9.h,
+                      fontWeight: FontWeight.w700,
+                      color: Utils.kExpenseFolderIndicatorColor),
+                )
+              ])
+            ],
+          ),
+        ),
+        painter: FolderPainter(folderFillColor: widget.folderFillColor),
+      ),
+    );
   }
 }
 
@@ -826,6 +707,8 @@ class FolderPainter extends CustomPainter {
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = folderFillColor;
+    canvas.drawShadow(path_0, Colors.grey.withAlpha(200), 4.0, false);
+
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -921,6 +804,60 @@ class FolderPainter extends CustomPainter {
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
     paint1Fill.color = const Color(0xffFE7886).withOpacity(1.0);
+    canvas.drawPath(path_1, paint1Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class BagIconPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(3.95196, 1.47323);
+    path_0.cubicTo(3.95196, 1.18707, 3.69407, 0.955093, 3.37596, 0.955093);
+    path_0.cubicTo(3.05784, 0.955093, 2.79996, 1.18707, 2.79996, 1.47323);
+    path_0.lineTo(2.79996, 2.7281);
+    path_0.cubicTo(1.65328, 2.87393, 0.747382, 3.68977, 0.59403, 4.73046);
+    path_0.lineTo(0.527559, 5.18155);
+    path_0.cubicTo(0.516289, 5.25802, 0.505513, 5.33455, 0.49523, 5.4111);
+    path_0.cubicTo(0.467954, 5.61419, 0.645827, 5.79102, 0.873236, 5.79102);
+    path_0.lineTo(13.5586, 5.79102);
+    path_0.cubicTo(13.786, 5.79102, 13.9639, 5.61419, 13.9366, 5.4111);
+    path_0.cubicTo(13.9264, 5.33454, 13.9156, 5.25802, 13.9043, 5.18154);
+    path_0.lineTo(13.8378, 4.73045);
+    path_0.cubicTo(13.6845, 3.68979, 12.7786, 2.87395, 11.632, 2.72811);
+    path_0.lineTo(11.632, 1.47323);
+    path_0.cubicTo(11.632, 1.18707, 11.3741, 0.955093, 11.056, 0.955093);
+    path_0.cubicTo(10.7378, 0.955093, 10.48, 1.18707, 10.48, 1.47323);
+    path_0.lineTo(10.48, 2.62531);
+    path_0.cubicTo(8.30826, 2.45133, 6.12366, 2.45133, 3.95196, 2.6253);
+    path_0.lineTo(3.95196, 1.47323);
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xff404446).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
+
+    Path path_1 = Path();
+    path_1.moveTo(14.0854, 7.15582);
+    path_1.cubicTo(14.0787, 6.97176, 13.9096, 6.82729, 13.7048, 6.82729);
+    path_1.lineTo(0.727022, 6.82729);
+    path_1.cubicTo(0.522295, 6.82729, 0.353208, 6.97176, 0.346485, 7.15582);
+    path_1.cubicTo(0.300866, 8.40463, 0.385194, 9.65601, 0.599262, 10.8935);
+    path_1.cubicTo(0.761317, 11.8303, 1.60739, 12.5499, 2.65628, 12.6429);
+    path_1.lineTo(3.57251, 12.7242);
+    path_1.cubicTo(5.99558, 12.9392, 8.43629, 12.9392, 10.8594, 12.7242);
+    path_1.lineTo(11.7756, 12.6429);
+    path_1.cubicTo(12.8245, 12.5499, 13.6706, 11.8303, 13.8326, 10.8935);
+    path_1.cubicTo(14.0467, 9.65601, 14.131, 8.40463, 14.0854, 7.15582);
+    path_1.close();
+
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = const Color(0xff404446).withOpacity(1.0);
     canvas.drawPath(path_1, paint1Fill);
   }
 

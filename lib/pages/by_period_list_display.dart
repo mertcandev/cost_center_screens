@@ -32,6 +32,36 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
     Utils.kChartFamilyColor,
     Utils.kChartMyProjectColor
   ];
+  final List<Map> _listViewDetails = [
+    {
+      "listViewText1": "January 22",
+      "progressBarValue": 0.5,
+      "listViewMoney1": 7900.00,
+      "listViewMoney2": 12650.00,
+      "iconFillColor": Utils.kSuperMarketIconFillColor,
+    },
+    {
+      "listViewText1": "February 22",
+      "progressBarValue": 0.5,
+      "listViewMoney1": 7900.00,
+      "listViewMoney2": 12650.00,
+      "iconFillColor": Utils.kTravelIconFillColor,
+    },
+    {
+      "listViewText1": "March 22",
+      "progressBarValue": 0.5,
+      "listViewMoney1": 7900.00,
+      "listViewMoney2": 12650.00,
+      "iconFillColor": Utils.kEducationFillColor,
+    },
+    {
+      "listViewText1": "April 22",
+      "progressBarValue": 0.5,
+      "listViewMoney1": 7900.00,
+      "listViewMoney2": 12650.00,
+      "iconFillColor": Utils.kTransportFillColor,
+    }
+  ];
 
   final String avatarImgPath = "assets/avatar.jpg";
   final String headerButtonText = "USD";
@@ -41,27 +71,12 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
   final String spendingDate = "Mar 22";
   final double bottomTimePickingLargeWidth = 77.w;
   final double bottomTimePickingSmallWidth = 57.w;
-  final String listViewText1 = "January 22";
-  final String listViewText2 = "February 22";
-  final String listViewText3 = "March 22";
-  final String listViewText4 = "April 22";
+  
 
   ExpenseIncomePick _selectedEI = ExpenseIncomePick.expense;
   BottomBarTimePick _selectedTime = BottomBarTimePick.d;
 
-  final double progressBarValuePersonel = 0.5;
-  final double progressBarValueWork = 0.5;
-  final double progressBarValueFamily = 0.5;
-  final double progressBarValueMyProject = 0.5;
 
-  final double listViewJanuary22BoldMoney = 7900.00;
-  final double listViewJanuary22LightMoney = 12650.00;
-  final double listViewFebruary22BoldMoney = 7900.00;
-  final double listViewFebruary22LightMoney = 12650.00;
-  final double listViewMarch22BoldMoney = 7900.00;
-  final double listViewMarch22LightMoney = 12650.00;
-  final double listViewApril22BoldMoney = 7900.00;
-  final double listViewApril22LightMoney = 12650.00;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +97,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
               ),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ByTransactionListDisplay()));
+                    builder: (context) => const ByTransactionListDisplay()));
               },
             ),
           ),
@@ -146,68 +161,65 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        totalSpendingText,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                            fontSize: 11.h,
-                            fontWeight: FontWeight.w400,
-                            color: Utils.kSpentTextColor),
-                      ),
-                      Text(
-                        totalSpentMoney,
-                        style: GoogleFonts.poppins(
-                            fontSize: 32.h,
-                            color: Utils.kSpentTextColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            spendingDate,
-                            style: GoogleFonts.poppins(fontSize: 11),
-                          ),
-                          const SizedBox(width: 5),
-                          Icon(
-                            Icons.work,
-                            color: Utils.kSpentTextColor,
-                            size: 13.h,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: SizedBox(
-                      height: 200.h,
-                      width: 200.h,
-                      child: PieChart(
-                        chartType: ChartType.ring,
-                        dataMap: chartMap,
-                        colorList: colorList,
-                        chartRadius: 130.h,
-                        ringStrokeWidth: 55,
-                        legendOptions: const LegendOptions(showLegends: false),
-                        chartValuesOptions:
-                            const ChartValuesOptions(showChartValues: false),
-                        animationDuration: const Duration(seconds: 2),
-                        centerText: "Top 3",
-                        centerTextStyle: GoogleFonts.poppins(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                            color: Utils.kChartCenterTextColor),
-                      ),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      totalSpendingText,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 11.h,
+                          fontWeight: FontWeight.w400,
+                          color: Utils.kSpentTextColor),
                     ),
-                  )
-                ]),
-              ),
+                    Text(
+                      totalSpentMoney,
+                      style: GoogleFonts.poppins(
+                          fontSize: 32.h,
+                          color: Utils.kSpentTextColor,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          spendingDate,
+                          style: GoogleFonts.poppins(fontSize: 11.h),
+                        ),
+                         SizedBox(width: 5.w),
+                        CustomPaint(
+                          size: const Size(15, 13),
+                          painter: BagIconPainter(),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: SizedBox(
+                    height: 150.h,
+                    width: 150.h,
+                    child: PieChart(
+                      chartType: ChartType.ring,
+                      dataMap: chartMap,
+                      colorList: colorList,
+                      chartRadius: 100.h,
+                      ringStrokeWidth: 40.h,
+                      legendOptions: const LegendOptions(showLegends: false),
+                      chartValuesOptions:
+                          const ChartValuesOptions(showChartValues: false),
+                      animationDuration: const Duration(seconds: 3),
+                      centerText: "Top 3",
+                      centerTextStyle: GoogleFonts.poppins(
+                          fontSize: 11.h,
+                          fontWeight: FontWeight.w400,
+                          color: Utils.kChartCenterTextColor),
+                    ),
+                  ),
+                )
+              ]),
             ),
             Padding(
               padding: EdgeInsets.only(top: 15.h, bottom: 20.h),
@@ -300,330 +312,24 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(right: 30.w, left: 30.w),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 17.h,
-                            width: 17.h,
-                            child: CustomPaint(
-                              //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                              painter: ClockIconPainter(
-                                  clockIconFillColor:
-                                      Utils.kJanuary22IconFillColor),
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listViewText1,
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.h),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 10.h,
-                                      width: 75.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: LinearProgressIndicator(
-                                        color: Utils.kJanuary22IconFillColor,
-                                        backgroundColor: Colors.white,
-                                        value: progressBarValueFamily,
-                                      ),
-                                    ),
-                                    SizedBox(width: 15.w),
-                                    Text(
-                                      "${(progressBarValueFamily * 100).toInt()} %",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500,
-                                          color: Utils.kJanuary22IconFillColor),
-                                    )
-                                  ]),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(listViewMarch22BoldMoney.toString(),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Utils.kListViewPrimaryTextColor)),
-                              Text(
-                                listViewMarch22LightMoney.toString(),
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Utils.kListViewSecondaryTextColor),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 290.w,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.h),
-                          child: const Divider(color: Utils.kListDividerColor),
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 17.h,
-                            width: 17.h,
-                            child: CustomPaint(
-                                /*  size: Size(
-                                    20,
-                                    (20 * 0.8181818181818182)
-                                        .toDouble()), */
-                                painter: ClockIconPainter(
-                                    clockIconFillColor:
-                                        Utils.kFebruary22IconFillColor)),
-                          ),
-                          SizedBox(width: 12.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listViewText2,
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.h),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 10.h,
-                                      width: 75.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: LinearProgressIndicator(
-                                        color: Utils.kFebruary22IconFillColor,
-                                        backgroundColor: Colors.white,
-                                        value: progressBarValueFamily,
-                                      ),
-                                    ),
-                                    SizedBox(width: 15.w),
-                                    Text(
-                                      "${(progressBarValueFamily * 100).toInt()} %",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Utils.kFebruary22IconFillColor),
-                                    )
-                                  ]),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(listViewMarch22BoldMoney.toString(),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Utils.kListViewPrimaryTextColor)),
-                              Text(
-                                listViewMarch22LightMoney.toString(),
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Utils.kListViewSecondaryTextColor),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 290.w,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.h),
-                          child: const Divider(color: Utils.kListDividerColor),
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 17.h,
-                            width: 17.h,
-                            child: CustomPaint(
-                              painter: ClockIconPainter(
-                                  clockIconFillColor:
-                                      Utils.kMarch22IconFillColor),
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listViewText3,
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.h),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 10.h,
-                                      width: 75.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: LinearProgressIndicator(
-                                        color: Utils.kMarch22IconFillColor,
-                                        backgroundColor: Colors.white,
-                                        value: progressBarValueFamily,
-                                      ),
-                                    ),
-                                    SizedBox(width: 15.w),
-                                    Text(
-                                      "${(progressBarValueFamily * 100).toInt()} %",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500,
-                                          color: Utils.kMarch22IconFillColor),
-                                    )
-                                  ]),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(listViewMarch22BoldMoney.toString(),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Utils.kListViewPrimaryTextColor)),
-                              Text(
-                                listViewMarch22LightMoney.toString(),
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Utils.kListViewSecondaryTextColor),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 290.w,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.h),
-                          child: const Divider(color: Utils.kListDividerColor),
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 17.h,
-                            width: 17.h,
-                            child: CustomPaint(
-                              painter: ClockIconPainter(
-                                  clockIconFillColor:
-                                      Utils.kApril22IconFillColor),
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listViewText4,
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.h),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 10.h,
-                                      width: 75.w,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: LinearProgressIndicator(
-                                        color: Utils.kApril22IconFillColor,
-                                        backgroundColor: Colors.white,
-                                        value: progressBarValueFamily,
-                                      ),
-                                    ),
-                                    SizedBox(width: 15.w),
-                                    Text(
-                                      "${(progressBarValueFamily * 100).toInt()} %",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500,
-                                          color: Utils.kApril22IconFillColor),
-                                    )
-                                  ]),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(listViewMarch22BoldMoney.toString(),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Utils.kListViewPrimaryTextColor)),
-                              Text(
-                                listViewMarch22LightMoney.toString(),
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Utils.kListViewSecondaryTextColor),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 290.w,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.h),
-                          child: const Divider(color: Utils.kListDividerColor),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )
+                child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ListViewListItem(
+                      listViewText1: _listViewDetails[index]["listViewText1"],
+                      progressBarValue: _listViewDetails[index]
+                          ["progressBarValue"],
+                      listViewMoney1: _listViewDetails[index]["listViewMoney1"],
+                      listViewMoney2: _listViewDetails[index]["listViewMoney2"],
+                      iconFillColor: _listViewDetails[index]["iconFillColor"],
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: _listViewDetails.length),
+            ))
           ],
         ),
         bottomNavigationBar: SizedBox(
@@ -655,7 +361,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                       child: Center(
                           child: Text("Expense",
                               style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 12.h,
                                   fontWeight: FontWeight.w700,
                                   color: _selectedEI ==
                                           ExpenseIncomePick.expense
@@ -686,7 +392,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                       child: Center(
                           child: Text("Income",
                               style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 12.h,
                                   fontWeight: FontWeight.w700,
                                   color: _selectedEI == ExpenseIncomePick.income
                                       ? Utils
@@ -726,7 +432,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                           child: Text(
                         "D",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.d
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -756,7 +462,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                           child: Text(
                         "W",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.w
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -786,7 +492,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                           child: Text(
                         "M",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.m
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -819,7 +525,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                           child: Text(
                         "Y",
                         style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 10.h,
                             fontWeight: FontWeight.w500,
                             color: _selectedTime == BottomBarTimePick.y
                                 ? Utils.kBottomBarTimePickSelectedTextColor
@@ -834,6 +540,94 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
         ),
       );
     });
+  }
+}
+
+class ListViewListItem extends StatelessWidget {
+  const ListViewListItem({
+    Key? key,
+    required this.listViewText1,
+    required this.progressBarValue,
+    required this.listViewMoney1,
+    required this.listViewMoney2,
+    required this.iconFillColor,
+  }) : super(key: key);
+
+  final String listViewText1;
+  final double progressBarValue;
+  final double listViewMoney1;
+  final double listViewMoney2;
+  final Color iconFillColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 17.h,
+            width: 17.h,
+            child: CustomPaint(
+              //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+              painter: ClockIconPainter(clockIconFillColor: iconFillColor),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                listViewText1,
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500, fontSize: 14.h),
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Container(
+                  height: 10.h,
+                  width: 75.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      border: Border.all(color: Colors.black)),
+                  child: LinearProgressIndicator(
+                    color: iconFillColor,
+                    backgroundColor: Colors.white,
+                    value: progressBarValue,
+                  ),
+                ),
+                SizedBox(width: 15.w),
+                Text(
+                  "${(progressBarValue * 100).toInt()} %",
+                  style: GoogleFonts.poppins(
+                      fontSize: 9.h,
+                      fontWeight: FontWeight.w500,
+                      color: iconFillColor),
+                )
+              ]),
+            ],
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(listViewMoney1.toString(),
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.h,
+                      fontWeight: FontWeight.w500,
+                      color: Utils.kListViewPrimaryTextColor)),
+              Text(
+                listViewMoney2.toString(),
+                style: GoogleFonts.poppins(
+                    fontSize: 12.h,
+                    fontWeight: FontWeight.w500,
+                    color: Utils.kListViewSecondaryTextColor),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -925,6 +719,103 @@ class ClockIconPainter extends CustomPainter {
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = clockIconFillColor;
+    canvas.drawPath(path_0, paint0Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class BagIconPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(3.95196, 1.47323);
+    path_0.cubicTo(3.95196, 1.18707, 3.69407, 0.955093, 3.37596, 0.955093);
+    path_0.cubicTo(3.05784, 0.955093, 2.79996, 1.18707, 2.79996, 1.47323);
+    path_0.lineTo(2.79996, 2.7281);
+    path_0.cubicTo(1.65328, 2.87393, 0.747382, 3.68977, 0.59403, 4.73046);
+    path_0.lineTo(0.527559, 5.18155);
+    path_0.cubicTo(0.516289, 5.25802, 0.505513, 5.33455, 0.49523, 5.4111);
+    path_0.cubicTo(0.467954, 5.61419, 0.645827, 5.79102, 0.873236, 5.79102);
+    path_0.lineTo(13.5586, 5.79102);
+    path_0.cubicTo(13.786, 5.79102, 13.9639, 5.61419, 13.9366, 5.4111);
+    path_0.cubicTo(13.9264, 5.33454, 13.9156, 5.25802, 13.9043, 5.18154);
+    path_0.lineTo(13.8378, 4.73045);
+    path_0.cubicTo(13.6845, 3.68979, 12.7786, 2.87395, 11.632, 2.72811);
+    path_0.lineTo(11.632, 1.47323);
+    path_0.cubicTo(11.632, 1.18707, 11.3741, 0.955093, 11.056, 0.955093);
+    path_0.cubicTo(10.7378, 0.955093, 10.48, 1.18707, 10.48, 1.47323);
+    path_0.lineTo(10.48, 2.62531);
+    path_0.cubicTo(8.30826, 2.45133, 6.12366, 2.45133, 3.95196, 2.6253);
+    path_0.lineTo(3.95196, 1.47323);
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xff404446).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
+
+    Path path_1 = Path();
+    path_1.moveTo(14.0854, 7.15582);
+    path_1.cubicTo(14.0787, 6.97176, 13.9096, 6.82729, 13.7048, 6.82729);
+    path_1.lineTo(0.727022, 6.82729);
+    path_1.cubicTo(0.522295, 6.82729, 0.353208, 6.97176, 0.346485, 7.15582);
+    path_1.cubicTo(0.300866, 8.40463, 0.385194, 9.65601, 0.599262, 10.8935);
+    path_1.cubicTo(0.761317, 11.8303, 1.60739, 12.5499, 2.65628, 12.6429);
+    path_1.lineTo(3.57251, 12.7242);
+    path_1.cubicTo(5.99558, 12.9392, 8.43629, 12.9392, 10.8594, 12.7242);
+    path_1.lineTo(11.7756, 12.6429);
+    path_1.cubicTo(12.8245, 12.5499, 13.6706, 11.8303, 13.8326, 10.8935);
+    path_1.cubicTo(14.0467, 9.65601, 14.131, 8.40463, 14.0854, 7.15582);
+    path_1.close();
+
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = const Color(0xff404446).withOpacity(1.0);
+    canvas.drawPath(path_1, paint1Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class BookMarkIconPainter extends CustomPainter {
+  Color bookmarkIconFillColor;
+  BookMarkIconPainter({
+    required this.bookmarkIconFillColor,
+  });
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.9791667, size.height * 0.04166667);
+    path_0.lineTo(size.width * 0.9791667, size.height * 0.04166667);
+    path_0.lineTo(size.width * 0.02083333, size.height * 0.04166667);
+    path_0.lineTo(size.width * 0.02083333, size.height * 0.9346778);
+    path_0.lineTo(size.width * 0.4683642, size.height * 0.5866000);
+    path_0.cubicTo(
+        size.width * 0.4849933,
+        size.height * 0.5736611,
+        size.width * 0.5150067,
+        size.height * 0.5736611,
+        size.width * 0.5316358,
+        size.height * 0.5866000);
+    path_0.lineTo(size.width * 0.9791667, size.height * 0.9346778);
+    path_0.lineTo(size.width * 0.9633917, size.height * 0.9436889);
+    path_0.lineTo(size.width * 0.9791667, size.height * 0.9346778);
+    path_0.lineTo(size.width * 0.9791667, size.height * 0.04166667);
+    path_0.close();
+
+    Paint paint0Stroke = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = size.width * 0.04166667;
+    paint0Stroke.color = const Color(0xff404446).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Stroke);
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = bookmarkIconFillColor;
     canvas.drawPath(path_0, paint0Fill);
   }
 

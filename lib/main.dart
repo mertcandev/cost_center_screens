@@ -1,4 +1,4 @@
-import 'package:cost_center_screens/pages/large_icons_display.dart';
+import 'package:cost_center_screens/pages/accounts_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           return const MaterialApp(
             debugShowCheckedModeBanner: false,
             useInheritedMediaQuery: true,
-            home: LargeIconsDisplay(),
+            home: AccountsFilter(),
           );
         });
   }
