@@ -68,150 +68,163 @@ class _AccountOverview2 extends State<AccountOverview2> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(builder: (context) {
-      return Scaffold(
-        backgroundColor: Utils.kBackgroundColor,
-        body: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                _showModalBottomSheet(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.only(top: 55.h, left: 24.w, right: 24.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.only(right: 30.w),
-                        child: Stack(
+    ScreenUtil.init(context);
+    return Scaffold(
+      backgroundColor: Utils.kBackgroundColor,
+      body: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              _showModalBottomSheet(context);
+            },
+            child: Padding(
+              padding: EdgeInsets.only(top: 55.h, left: 24.w, right: 24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(right: 30.w),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 36.h,
+                            width: 36.w,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(avatarImgPath)),
+                                shape: BoxShape.circle),
+                          ),
+                          Positioned(
+                              right: 1.5,
+                              top: 1.5,
+                              child: Visibility(
+                                  visible: notificationVisibility,
+                                  child: Container(
+                                    height: 8.h,
+                                    width: 8.w,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white),
+                                    child: Center(
+                                        child: Container(
+                                      height: 6.h,
+                                      width: 6.w,
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0xffFF5247)),
+                                    )),
+                                  )))
+                        ],
+                      )),
+                  Text("Swipe",
+                      style: GoogleFonts.poppins(
+                          fontSize: 20.h, fontWeight: FontWeight.w500)),
+                  Container(
+                    height: 32.h,
+                    width: 66.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(48.sp),
+                        color: Utils.kHeaderCurrencyButtonColor),
+                    child: Center(
+                      child: Text(
+                        headerButtonText,
+                        style: GoogleFonts.poppins(
+                            fontSize: 16.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kHeaderCurrencyButtonTextColor),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: 25.w, right: 25.w, top: 30.h, bottom: 16.h),
+            child: SizedBox(
+              width: 310.w,
+              height: 20.h,
+              child: Text(
+                "Multiple Selection",
+                textAlign: TextAlign.end,
+                style: GoogleFonts.poppins(
+                    fontSize: 16.h,
+                    color: Utils.kMultipleSelectionTextColor,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 25.w, right: 25.w),
+            child: Container(
+                height: 181.h,
+                width: 312.w,
+                decoration: BoxDecoration(
+                    color: Utils.kAccountCardColor,
+                    borderRadius: BorderRadius.circular(16.sp)),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 18.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 26.h,
+                            bottom:
+                                MediaQuery.of(context).size.height * 0.0125),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.075,
+                              width: MediaQuery.of(context).size.height * 0.075,
+                              child: CustomPaint(
+                                painter: AccountLogoPainter(),
+                              ),
+                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height *
+                                    0.0175),
+                            Text(
+                              "Total Accounts",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 12.h,
+                                  fontWeight: FontWeight.w700,
+                                  color: Utils.kAccountCardTextColor),
+                            ),
+                            Text(
+                              "1 000 000 USD",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 24.h,
+                                  fontWeight: FontWeight.w700,
+                                  color: Utils.kAccountCardTextColor),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 26.h, bottom: 18.h),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               height: 36.h,
                               width: 36.w,
                               decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(avatarImgPath)),
-                                  shape: BoxShape.circle),
-                            ),
-                            Positioned(
-                                right: 1.5,
-                                top: 1.5,
-                                child: Visibility(
-                                    visible: notificationVisibility,
-                                    child: Container(
-                                      height: 8.h,
-                                      width: 8.w,
-                                      decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white),
-                                      child: Center(
-                                          child: Container(
-                                        height: 6.h,
-                                        width: 6.w,
-                                        decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0xffFF5247)),
-                                      )),
-                                    )))
-                          ],
-                        )),
-                    Text("Swipe",
-                        style: GoogleFonts.poppins(
-                            fontSize: 20.h, fontWeight: FontWeight.w500)),
-                    Container(
-                      height: 32.h,
-                      width: 66.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(48),
-                          color: Utils.kHeaderCurrencyButtonColor),
-                      child: Center(
-                        child: Text(
-                          headerButtonText,
-                          style: GoogleFonts.poppins(
-                              fontSize: 16.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kHeaderCurrencyButtonTextColor),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 25.w, right: 25.w, top: 30.h, bottom: 16.h),
-              child: SizedBox(
-                width: 310.w,
-                height: 20.h,
-                child: Text(
-                  "Multiple Selection",
-                  textAlign: TextAlign.end,
-                  style: GoogleFonts.poppins(
-                      fontSize: 16.h,
-                      color: Utils.kMultipleSelectionTextColor,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25.w, right: 25.w),
-              child: Container(
-                  height: 181.h,
-                  width: 312.w,
-                  decoration: BoxDecoration(
-                      color: Utils.kAccountCardColor,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 18.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 26.h,
-                              bottom:
-                                  MediaQuery.of(context).size.height * 0.0125),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.075,
-                                width:
-                                    MediaQuery.of(context).size.height * 0.075,
-                                child: CustomPaint(
-                                  //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                  painter: AccountLogoPainter(),
+                                  shape: BoxShape.circle,
+                                  color: Utils.kAccountCardTextColor
+                                      .withOpacity(0.15)),
+                              child: Center(
+                                child: Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Utils.kAccountCardTextColor,
+                                  size: 18.h,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.0175),
-                              Text(
-                                "Total Accounts",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12.h,
-                                    fontWeight: FontWeight.w700,
-                                    color: Utils.kAccountCardTextColor),
-                              ),
-                              Text(
-                                "1 000 000 USD",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 24.h,
-                                    fontWeight: FontWeight.w700,
-                                    color: Utils.kAccountCardTextColor),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 26.h, bottom: 18.h),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
+                            ),
+                            Container(
                                 height: 36.h,
                                 width: 36.w,
                                 decoration: BoxDecoration(
@@ -219,376 +232,356 @@ class _AccountOverview2 extends State<AccountOverview2> {
                                     color: Utils.kAccountCardTextColor
                                         .withOpacity(0.15)),
                                 child: Center(
-                                  child: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: Utils.kAccountCardTextColor,
-                                    size: 18.h,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                  height: 36.h,
-                                  width: 36.h,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Utils.kAccountCardTextColor
-                                          .withOpacity(0.15)),
-                                  child: Center(
-                                      child: CustomPaint(
-                                    size: const Size(18, 18),
-                                    painter: BagIconPainter(),
-                                  ))),
-                            ],
-                          ),
+                                    child: CustomPaint(
+                                  size: Size(18.w, 18.h),
+                                  painter: BagIconPainter(),
+                                ))),
+                          ],
                         ),
-                      ],
-                    ),
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 19.w, top: 24, bottom: 24),
-              child: SizedBox(
-                height: 40,
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(36, 30),
-                          painter: BookmarkLogoPainter2(),
-                        )),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                            child: Icon(Icons.filter_alt_rounded,
-                                color: Utils.kSelectionTabIconColor, size: 25)),
+                    ],
+                  ),
+                )),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 19.w, top: 24.h, bottom: 24.h),
+            child: SizedBox(
+              height: 40.h,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(36.w, 30.h),
+                        painter: BookmarkLogoPainter2(),
+                      )),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                            child: Icon(
-                          Icons.border_color_rounded,
-                          color: Utils.kSelectionTabIconColor,
-                          size: 25,
-                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      child: Center(
+                          child: Icon(Icons.filter_alt_rounded,
+                              color: Utils.kSelectionTabIconColor, size: 25.h)),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(18, 22),
-                          painter: MobileDataPainter1(),
-                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      child: Center(
+                          child: Icon(Icons.border_color_rounded,
+                              color: Utils.kSelectionTabIconColor, size: 25.h)),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(18, 14),
-                          painter: MenuIconPainter1(),
-                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(18.w, 22.h),
+                        painter: MobileDataPainter1(),
+                      )),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        width: 45,
-                        height: 39,
-                        decoration: BoxDecoration(
-                          color: Utils.kSelectionTabButtonColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(17, 19),
-                          painter: PieChartIconPainter1(),
-                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(18.w, 14.h),
+                        painter: MenuIconPainter1(),
+                      )),
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Container(
+                      width: 45.w,
+                      height: 39.h,
+                      decoration: BoxDecoration(
+                        color: Utils.kSelectionTabButtonColor,
+                        borderRadius: BorderRadius.circular(10.sp),
+                      ),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(17.w, 19.h),
+                        painter: PieChartIconPainter1(),
+                      )),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
-                  itemCount: _balanceDetailsList.length,
-                  itemBuilder: (context, index) {
-                    return OverviewPage2ListItem(
-                        dotColor: _balanceDetailsList[index]["dotColor"],
-                        balanceTypeText: _balanceDetailsList[index]
-                            ["balanceType"],
-                        date: _balanceDetailsList[index]["date"],
-                        money: _balanceDetailsList[index]["money"]);
-                  },
-                ),
+          ),
+          Expanded(
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemCount: _balanceDetailsList.length,
+                itemBuilder: (context, index) {
+                  return OverviewPage2ListItem(
+                      dotColor: _balanceDetailsList[index]["dotColor"],
+                      balanceTypeText: _balanceDetailsList[index]
+                          ["balanceType"],
+                      date: _balanceDetailsList[index]["date"],
+                      money: _balanceDetailsList[index]["money"]);
+                },
               ),
+            ),
+          )
+        ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              blurRadius: 2,
+              spreadRadius: 1),
+        ]),
+        height: 86.h,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedEI = ExpenseIncomePick.expense;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 28.h,
+                    width: 118.5.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.sp),
+                      color: _selectedEI == ExpenseIncomePick.expense
+                          ? Utils.kBottomBarExpenseIncomeSelectedColor
+                          : Utils.kBottomBarExpenseIncomeUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text("Expense",
+                            style: GoogleFonts.poppins(
+                                fontSize: 12.h,
+                                fontWeight: FontWeight.w700,
+                                color: _selectedEI == ExpenseIncomePick.expense
+                                    ? Utils
+                                        .kBottomBarExpenseIncomeSelectedTextColor
+                                    : Utils
+                                        .kBottomBarExpenseIncomeUnselectedTextColor))),
+                  ),
+                ),
+                SizedBox(width: 16.w),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedEI = ExpenseIncomePick.income;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 28.h,
+                    width: 118.5.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.sp),
+                      color: _selectedEI == ExpenseIncomePick.income
+                          ? Utils.kBottomBarExpenseIncomeSelectedColor
+                          : Utils.kBottomBarExpenseIncomeUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text("Income",
+                            style: GoogleFonts.poppins(
+                                fontSize: 12.h,
+                                fontWeight: FontWeight.w700,
+                                color: _selectedEI == ExpenseIncomePick.income
+                                    ? Utils
+                                        .kBottomBarExpenseIncomeSelectedTextColor
+                                    : Utils
+                                        .kBottomBarExpenseIncomeUnselectedTextColor))),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 12.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTime = BottomBarTimePick.d;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 22.h,
+                    width: _selectedTime == BottomBarTimePick.d
+                        ? bottomTimePickingLargeWidth
+                        : bottomTimePickingSmallWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4),
+                          bottomLeft: Radius.circular(4)),
+                      color: _selectedTime == BottomBarTimePick.d
+                          ? Utils.kBottomBarTimePickSelectedColor
+                          : Utils.kBottomBarTimePickUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "D",
+                      style: GoogleFonts.poppins(
+                          fontSize: 10.h,
+                          fontWeight: FontWeight.w500,
+                          color: _selectedTime == BottomBarTimePick.d
+                              ? Utils.kBottomBarTimePickSelectedTextColor
+                              : Utils.kBottomBarTimePickUnselectedTextColor),
+                    )),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTime = BottomBarTimePick.w;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 22.h,
+                    width: _selectedTime == BottomBarTimePick.w
+                        ? bottomTimePickingLargeWidth
+                        : bottomTimePickingSmallWidth,
+                    decoration: BoxDecoration(
+                      color: _selectedTime == BottomBarTimePick.w
+                          ? Utils.kBottomBarTimePickSelectedColor
+                          : Utils.kBottomBarTimePickUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "W",
+                      style: GoogleFonts.poppins(
+                          fontSize: 10.h,
+                          fontWeight: FontWeight.w500,
+                          color: _selectedTime == BottomBarTimePick.w
+                              ? Utils.kBottomBarTimePickSelectedTextColor
+                              : Utils.kBottomBarTimePickUnselectedTextColor),
+                    )),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTime = BottomBarTimePick.m;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 22.h,
+                    width: _selectedTime == BottomBarTimePick.m
+                        ? bottomTimePickingLargeWidth
+                        : bottomTimePickingSmallWidth,
+                    decoration: BoxDecoration(
+                      color: _selectedTime == BottomBarTimePick.m
+                          ? Utils.kBottomBarTimePickSelectedColor
+                          : Utils.kBottomBarTimePickUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "M",
+                      style: GoogleFonts.poppins(
+                          fontSize: 10.h,
+                          fontWeight: FontWeight.w500,
+                          color: _selectedTime == BottomBarTimePick.m
+                              ? Utils.kBottomBarTimePickSelectedTextColor
+                              : Utils.kBottomBarTimePickUnselectedTextColor),
+                    )),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTime = BottomBarTimePick.y;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    height: 22.h,
+                    width: _selectedTime == BottomBarTimePick.y
+                        ? bottomTimePickingLargeWidth
+                        : bottomTimePickingSmallWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          bottomRight: Radius.circular(4),
+                          topRight: Radius.circular(4)),
+                      color: _selectedTime == BottomBarTimePick.y
+                          ? Utils.kBottomBarTimePickSelectedColor
+                          : Utils.kBottomBarTimePickUnselectedColor,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "Y",
+                      style: GoogleFonts.poppins(
+                          fontSize: 10.h,
+                          fontWeight: FontWeight.w500,
+                          color: _selectedTime == BottomBarTimePick.y
+                              ? Utils.kBottomBarTimePickSelectedTextColor
+                              : Utils.kBottomBarTimePickUnselectedTextColor),
+                    )),
+                  ),
+                ),
+              ],
             )
           ],
         ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 2,
-                spreadRadius: 1),
-          ]),
-          height: 86.h,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedEI = ExpenseIncomePick.expense;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 28.h,
-                      width: 118.5.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: _selectedEI == ExpenseIncomePick.expense
-                            ? Utils.kBottomBarExpenseIncomeSelectedColor
-                            : Utils.kBottomBarExpenseIncomeUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text("Expense",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12.h,
-                                  fontWeight: FontWeight.w700,
-                                  color: _selectedEI ==
-                                          ExpenseIncomePick.expense
-                                      ? Utils
-                                          .kBottomBarExpenseIncomeSelectedTextColor
-                                      : Utils
-                                          .kBottomBarExpenseIncomeUnselectedTextColor))),
-                    ),
-                  ),
-                  SizedBox(width: 16.w),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedEI = ExpenseIncomePick.income;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 28.h,
-                      width: 118.5.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: _selectedEI == ExpenseIncomePick.income
-                            ? Utils.kBottomBarExpenseIncomeSelectedColor
-                            : Utils.kBottomBarExpenseIncomeUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text("Income",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12.h,
-                                  fontWeight: FontWeight.w700,
-                                  color: _selectedEI == ExpenseIncomePick.income
-                                      ? Utils
-                                          .kBottomBarExpenseIncomeSelectedTextColor
-                                      : Utils
-                                          .kBottomBarExpenseIncomeUnselectedTextColor))),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedTime = BottomBarTimePick.d;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 22.h,
-                      width: _selectedTime == BottomBarTimePick.d
-                          ? bottomTimePickingLargeWidth
-                          : bottomTimePickingSmallWidth,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4),
-                            bottomLeft: Radius.circular(4)),
-                        color: _selectedTime == BottomBarTimePick.d
-                            ? Utils.kBottomBarTimePickSelectedColor
-                            : Utils.kBottomBarTimePickUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "D",
-                        style: GoogleFonts.poppins(
-                            fontSize: 10.h,
-                            fontWeight: FontWeight.w500,
-                            color: _selectedTime == BottomBarTimePick.d
-                                ? Utils.kBottomBarTimePickSelectedTextColor
-                                : Utils.kBottomBarTimePickUnselectedTextColor),
-                      )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedTime = BottomBarTimePick.w;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 22.h,
-                      width: _selectedTime == BottomBarTimePick.w
-                          ? bottomTimePickingLargeWidth
-                          : bottomTimePickingSmallWidth,
-                      decoration: BoxDecoration(
-                        color: _selectedTime == BottomBarTimePick.w
-                            ? Utils.kBottomBarTimePickSelectedColor
-                            : Utils.kBottomBarTimePickUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "W",
-                        style: GoogleFonts.poppins(
-                            fontSize: 10.h,
-                            fontWeight: FontWeight.w500,
-                            color: _selectedTime == BottomBarTimePick.w
-                                ? Utils.kBottomBarTimePickSelectedTextColor
-                                : Utils.kBottomBarTimePickUnselectedTextColor),
-                      )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedTime = BottomBarTimePick.m;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 22.h,
-                      width: _selectedTime == BottomBarTimePick.m
-                          ? bottomTimePickingLargeWidth
-                          : bottomTimePickingSmallWidth,
-                      decoration: BoxDecoration(
-                        color: _selectedTime == BottomBarTimePick.m
-                            ? Utils.kBottomBarTimePickSelectedColor
-                            : Utils.kBottomBarTimePickUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "M",
-                        style: GoogleFonts.poppins(
-                            fontSize: 10.h,
-                            fontWeight: FontWeight.w500,
-                            color: _selectedTime == BottomBarTimePick.m
-                                ? Utils.kBottomBarTimePickSelectedTextColor
-                                : Utils.kBottomBarTimePickUnselectedTextColor),
-                      )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedTime = BottomBarTimePick.y;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: const Duration(milliseconds: 300),
-                      height: 22.h,
-                      width: _selectedTime == BottomBarTimePick.y
-                          ? bottomTimePickingLargeWidth
-                          : bottomTimePickingSmallWidth,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(4),
-                            topRight: Radius.circular(4)),
-                        color: _selectedTime == BottomBarTimePick.y
-                            ? Utils.kBottomBarTimePickSelectedColor
-                            : Utils.kBottomBarTimePickUnselectedColor,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "Y",
-                        style: GoogleFonts.poppins(
-                            fontSize: 10.h,
-                            fontWeight: FontWeight.w500,
-                            color: _selectedTime == BottomBarTimePick.y
-                                ? Utils.kBottomBarTimePickSelectedTextColor
-                                : Utils.kBottomBarTimePickUnselectedTextColor),
-                      )),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      );
-    });
+      ),
+    );
   }
 
   Future<dynamic> _showModalBottomSheet(BuildContext context) {
@@ -621,14 +614,14 @@ class _AccountOverview2 extends State<AccountOverview2> {
                         padding: EdgeInsets.only(top: 24.h, bottom: 24.h),
                         child: Container(
                           height: 64.h,
-                          width: 64.h,
+                          width: 64.w,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Utils.kOverviewModalSheetIconBackGroundColor,
                           ),
                           child: Center(
                               child: CustomPaint(
-                            size: const Size(26, 26),
+                            size: Size(26.w, 26.h),
                             painter: ModalSheetIconPainter1(),
                           )),
                         ),

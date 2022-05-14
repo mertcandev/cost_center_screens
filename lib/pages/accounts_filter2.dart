@@ -12,7 +12,6 @@ List<Map> _balanceDetails = [
   {"balanceText": "QNB", "balanceMoney": 200000}
 ];
 
-
 enum PurposePick { cost, profit, generic }
 
 class AccountsFilter2 extends StatefulWidget {
@@ -38,222 +37,219 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(builder: (context) {
-      return Scaffold(
-        extendBody: false,
-        backgroundColor: Utils.kBackgroundColor,
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 55.h, left: 24.w, right: 24.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(right: 30.w),
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 36.h,
-                            width: 36.w,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(avatarImgPath)),
-                                shape: BoxShape.circle),
-                          ),
-                          Positioned(
-                              right: 1.5,
-                              top: 1.5,
-                              child: Visibility(
-                                  visible: notificationVisibility,
-                                  child: Container(
-                                    height: 8.h,
-                                    width: 8.w,
+    ScreenUtil.init(context);
+    return Scaffold(
+      extendBody: false,
+      backgroundColor: Utils.kBackgroundColor,
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 55.h, left: 24.w, right: 24.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(right: 30.w),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 36.h,
+                          width: 36.w,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(avatarImgPath)),
+                              shape: BoxShape.circle),
+                        ),
+                        Positioned(
+                            right: 1.5,
+                            top: 1.5,
+                            child: Visibility(
+                                visible: notificationVisibility,
+                                child: Container(
+                                  height: 8.h,
+                                  width: 8.w,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white),
+                                  child: Center(
+                                      child: Container(
+                                    height: 6.h,
+                                    width: 6.w,
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Colors.white),
-                                    child: Center(
-                                        child: Container(
-                                      height: 6.h,
-                                      width: 6.w,
-                                      decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color(0xffFF5247)),
-                                    )),
-                                  )))
-                        ],
-                      )),
-                  Text("Swipe",
+                                        color: Color(0xffFF5247)),
+                                  )),
+                                )))
+                      ],
+                    )),
+                Text("Swipe",
+                    style: GoogleFonts.poppins(
+                        fontSize: 20.h, fontWeight: FontWeight.w500)),
+                Container(
+                  height: 32.h,
+                  width: 66.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(48.sp),
+                      color: Utils.kHeaderCurrencyButtonColor),
+                  child: Center(
+                    child: Text(
+                      headerButtonText,
                       style: GoogleFonts.poppins(
-                          fontSize: 20.h, fontWeight: FontWeight.w500)),
-                  Container(
-                    height: 32.h,
-                    width: 66.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(48),
-                        color: Utils.kHeaderCurrencyButtonColor),
-                    child: Center(
-                      child: Text(
-                        headerButtonText,
-                        style: GoogleFonts.poppins(
-                            fontSize: 16.h,
-                            fontWeight: FontWeight.w700,
-                            color: Utils.kHeaderCurrencyButtonTextColor),
-                      ),
+                          fontSize: 16.h,
+                          fontWeight: FontWeight.w700,
+                          color: Utils.kHeaderCurrencyButtonTextColor),
                     ),
-                  )
-                ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(left: 25.w, right: 25.w, top: 30.h, bottom: 10),
+            child: SizedBox(
+              width: 310.w,
+              height: 20.h,
+              child: Text(
+                "Multiple Selection",
+                textAlign: TextAlign.end,
+                style: GoogleFonts.poppins(
+                    fontSize: 14.h,
+                    color: Utils.kMultipleSelectionTextColor,
+                    fontWeight: FontWeight.w500),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 25.w, right: 25.w, top: 30.h, bottom: 10),
-              child: SizedBox(
-                width: 310.w,
-                height: 20.h,
-                child: Text(
-                  "Multiple Selection",
-                  textAlign: TextAlign.end,
-                  style: GoogleFonts.poppins(
-                      fontSize: 14.h,
-                      color: Utils.kMultipleSelectionTextColor,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            Expanded(
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _balanceDetails.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ListDisplayListCard(
-                          balanceText: _balanceDetails[index]["balanceText"],
-                          balanceMoney: _balanceDetails[index]["balanceMoney"],
-                        );
-                      },
-                    ),
-                    Padding(
-                        padding:
-                            EdgeInsets.only(left: 25.w, right: 25.w, top: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            _showModalBottomSheet(context);
-                          },
-                          child: Container(
-                            width: 310.w,
-                            height: 102.h,
-                            decoration: BoxDecoration(
-                                color: Utils.kBackgroundColor,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: Utils.kAccountCardColor, width: 2)),
-                            child: Center(
-                                child: SizedBox(
-                              height: 30,
-                              width: 30,
-                              child: CustomPaint(
-                                painter: AddIconPainter(),
-                              ),
-                            )),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: SizedBox(
-            height: 90,
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 36, right: 36, top: 10, bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          Expanded(
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 56,
-                      width: 56,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Utils.kCircularBottomBarButtonColor),
-                      child: const Center(
-                        child: Icon(
-                          Icons.reply_rounded,
-                          color: Utils.kCircularBottomBarIconColor1,
-                          size: 30,
-                        ),
-                      ),
-                    ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _balanceDetails.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ListDisplayListCard(
+                        balanceText: _balanceDetails[index]["balanceText"],
+                        balanceMoney: _balanceDetails[index]["balanceMoney"],
+                      );
+                    },
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 56,
-                      width: 56,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Utils.kCircularBottomBarButtonColor),
-                      child: const Center(
-                        child: Icon(
-                          Icons.border_color_rounded,
-                          color: Utils.kCircularBottomBarIconColor2,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 56,
-                      width: 56,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Utils.kCircularBottomBarButtonColor),
-                      child: const Center(
-                        child: Icon(
-                          Icons.filter_alt_rounded,
-                          color: Utils.kCircularBottomBarIconColor3,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 56,
-                      width: 56,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Utils.kCircularBottomBarButtonColor),
-                      child: Center(
-                          child: SizedBox(
-                        height: 22,
-                        width: 22,
-                        child: CustomPaint(
-                          painter: MobileDataPainter(
-                              iconColor: Utils.kCircularBottomBarIconColor4),
+                  Padding(
+                      padding:
+                          EdgeInsets.only(left: 25.w, right: 25.w, top: 10.h),
+                      child: GestureDetector(
+                        onTap: () {
+                          _showModalBottomSheet(context);
+                        },
+                        child: Container(
+                          width: 310.w,
+                          height: 102.h,
+                          decoration: BoxDecoration(
+                              color: Utils.kBackgroundColor,
+                              borderRadius: BorderRadius.circular(20.sp),
+                              border: Border.all(
+                                  color: Utils.kAccountCardColor, width: 2)),
+                          child: Center(
+                              child: SizedBox(
+                            height: 30.h,
+                            width: 30.w,
+                            child: CustomPaint(
+                              painter: AddIconPainter(),
+                            ),
+                          )),
                         ),
                       )),
-                    ),
-                  ),
                 ],
               ),
-            )),
-      );
-    });
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: SizedBox(
+          height: 90.h,
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 36.w, right: 36.w, top: 10.h, bottom: 15.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 56.h,
+                    width: 56.w,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Utils.kCircularBottomBarButtonColor),
+                    child: Center(
+                      child: Icon(
+                        Icons.reply_rounded,
+                        color: Utils.kCircularBottomBarIconColor1,
+                        size: 30.w,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 56.h,
+                    width: 56.w,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Utils.kCircularBottomBarButtonColor),
+                    child: Center(
+                        child: CustomPaint(
+                      size: Size(21.w, 21.h),
+                      painter: EditIconPainter(),
+                    )),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 56.h,
+                    width: 56.w,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Utils.kCircularBottomBarButtonColor),
+                    child: Center(
+                      child: Icon(
+                        Icons.filter_alt_rounded,
+                        color: Utils.kCircularBottomBarIconColor3,
+                        size: 30.h,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 56.h,
+                    width: 56.w,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Utils.kCircularBottomBarButtonColor),
+                    child: Center(
+                        child: SizedBox(
+                      height: 22.h,
+                      width: 22.w,
+                      child: CustomPaint(
+                        painter: MobileDataPainter(
+                            iconColor: Utils.kCircularBottomBarIconColor4),
+                      ),
+                    )),
+                  ),
+                ),
+              ],
+            ),
+          )),
+    );
   }
 
   Future<dynamic> _showModalBottomSheet(BuildContext context) {
@@ -332,7 +328,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 16.h, left: 24),
+                    padding: EdgeInsets.only(top: 16.h, left: 24.w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,7 +348,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                             width: 313.w,
                             height: 48.h,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(8.sp),
                                 border: Border.all(
                                     color: Utils
                                         .kAccountFilterEditModalSheetTextFieldColor)),
@@ -399,8 +395,8 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 children: [
                                   AnimatedContainer(
                                     duration: const Duration(milliseconds: 500),
-                                    height: 20,
-                                    width: 20,
+                                    height: 20.h,
+                                    width: 20.w,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: const Color(0xff5BEFBD)
@@ -413,16 +409,16 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                                 : false,
                                         child: Center(
                                           child: Container(
-                                            height: 16,
-                                            width: 16,
+                                            height: 16.h,
+                                            width: 16.w,
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xff5BEFBD),
                                             ),
                                             child: Center(
                                               child: Container(
-                                                height: 7,
-                                                width: 7,
+                                                height: 7.h,
+                                                width: 7.w,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.white),
@@ -431,7 +427,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                           ),
                                         )),
                                   ),
-                                  const SizedBox(width: 6),
+                                  SizedBox(width: 6.w),
                                   Text(
                                     "Cost Center",
                                     style: GoogleFonts.poppins(
@@ -443,7 +439,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 21),
+                            SizedBox(height: 21.h),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -454,8 +450,8 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 children: [
                                   AnimatedContainer(
                                     duration: const Duration(milliseconds: 500),
-                                    height: 20,
-                                    width: 20,
+                                    height: 20.h,
+                                    width: 20.w,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: const Color(0xff5BEFBD)
@@ -468,16 +464,16 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                             : false,
                                         child: Center(
                                           child: Container(
-                                            height: 16,
-                                            width: 16,
+                                            height: 16.h,
+                                            width: 16.w,
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xff5BEFBD),
                                             ),
                                             child: Center(
                                               child: Container(
-                                                height: 7,
-                                                width: 7,
+                                                height: 7.h,
+                                                width: 7.w,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.white),
@@ -486,7 +482,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                           ),
                                         )),
                                   ),
-                                  const SizedBox(width: 6),
+                                  SizedBox(width: 6.w),
                                   Text(
                                     "Profit Center",
                                     style: GoogleFonts.poppins(
@@ -498,7 +494,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 21),
+                            SizedBox(height: 21.h),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -509,8 +505,8 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 children: [
                                   AnimatedContainer(
                                     duration: const Duration(milliseconds: 500),
-                                    height: 20,
-                                    width: 20,
+                                    height: 20.h,
+                                    width: 20.w,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: const Color(0xff5BEFBD)
@@ -523,16 +519,16 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                             : false,
                                         child: Center(
                                           child: Container(
-                                            height: 16,
-                                            width: 16,
+                                            height: 16.h,
+                                            width: 16.w,
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xff5BEFBD),
                                             ),
                                             child: Center(
                                               child: Container(
-                                                height: 7,
-                                                width: 7,
+                                                height: 7.h,
+                                                width: 7.w,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.white),
@@ -541,7 +537,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                           ),
                                         )),
                                   ),
-                                  const SizedBox(width: 6),
+                                  SizedBox(width: 6.w),
                                   Text(
                                     "Generic",
                                     style: GoogleFonts.poppins(
@@ -581,7 +577,7 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15.h),
                             Text(
                               "Delete",
                               style: GoogleFonts.poppins(
@@ -604,12 +600,12 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
                                   color: Utils.kSaveButtonColor),
                               child: Center(
                                 child: CustomPaint(
-                                  size: const Size(23, 17),
+                                  size: Size(23.w, 17.h),
                                   painter: SaveIconPainter(),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 15),
+                            SizedBox(height: 15.h),
                             Text(
                               "Save",
                               style: GoogleFonts.poppins(
@@ -648,14 +644,14 @@ class ListDisplayListCard extends StatelessWidget {
           width: 310.w,
           decoration: BoxDecoration(
               color: Utils.kAccountCardColor,
-              borderRadius: BorderRadius.circular(16)),
+              borderRadius: BorderRadius.circular(16.sp)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: 33,
-                    left: 26,
+                    top: 33.h,
+                    left: 26.w,
                     bottom: MediaQuery.of(context).size.height * 0.0125),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -664,7 +660,6 @@ class ListDisplayListCard extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.075,
                       width: MediaQuery.of(context).size.height * 0.075,
                       child: CustomPaint(
-                        //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
                         painter: AccountLogoPainter(),
                       ),
                     ),
@@ -713,7 +708,7 @@ class ListDisplayListCard extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: SizedBox(
-                        height: 20,
+                        height: 20.h,
                         child: Center(
                             child: Row(
                           children: [
@@ -723,7 +718,7 @@ class ListDisplayListCard extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     color: Utils.kAccountCardTextColor)),
                             Padding(
-                              padding: const EdgeInsets.only(left: 18),
+                              padding: EdgeInsets.only(left: 18.w),
                               child: CustomPaint(
                                 size: Size(15.w, 13.h),
                                 painter: BagIconPainter(),
@@ -1346,6 +1341,50 @@ class BagIconPainter extends CustomPainter {
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
     paint1Fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_1, paint1Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class EditIconPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(14.041, 0.0833435);
+    path_0.cubicTo(14.1957, 0.0833435, 14.3441, 0.144802, 14.4535, 0.254198);
+    path_0.lineTo(17.7533, 3.55403);
+    path_0.cubicTo(17.9811, 3.78184, 17.9811, 4.15118, 17.7533, 4.37899);
+    path_0.lineTo(7.02885, 15.1034);
+    path_0.cubicTo(6.95556, 15.1767, 6.86407, 15.2292, 6.76379, 15.2554);
+    path_0.lineTo(2.29729, 16.422);
+    path_0.cubicTo(2.09693, 16.4744, 1.88383, 16.4165, 1.73739, 16.2701);
+    path_0.cubicTo(1.59096, 16.1237, 1.53314, 15.9106, 1.58547, 15.7102);
+    path_0.lineTo(2.75214, 11.2437);
+    path_0.cubicTo(2.77833, 11.1434, 2.83077, 11.0519, 2.90406, 10.9787);
+    path_0.lineTo(13.6285, 0.254198);
+    path_0.cubicTo(13.7379, 0.144802, 13.8863, 0.0833435, 14.041, 0.0833435);
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xffFFB323).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
+
+    Path path_1 = Path();
+    path_1.moveTo(1.66663, 18.4583);
+    path_1.cubicTo(1.18338, 18.4583, 0.791626, 18.8501, 0.791626, 19.3333);
+    path_1.cubicTo(0.791626, 19.8166, 1.18338, 20.2083, 1.66663, 20.2083);
+    path_1.lineTo(19.1666, 20.2083);
+    path_1.cubicTo(19.6499, 20.2083, 20.0416, 19.8166, 20.0416, 19.3333);
+    path_1.cubicTo(20.0416, 18.8501, 19.6499, 18.4583, 19.1666, 18.4583);
+    path_1.lineTo(1.66663, 18.4583);
+    path_1.close();
+
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = const Color(0xffFFB323).withOpacity(1.0);
     canvas.drawPath(path_1, paint1Fill);
   }
 

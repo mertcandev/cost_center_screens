@@ -22,472 +22,470 @@ class _SingleTransactionDisplay extends State<SingleTransactionDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(builder: (context) {
-      return Scaffold(
-          backgroundColor: Utils.kBackgroundColor,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: 55.h, left: 24.w, right: 24.w, bottom: 25.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          height: 20.h,
-                          width: 20.w,
-                          color: Colors.transparent,
-                          child: Center(
-                            child: Icon(Icons.arrow_back_ios, size: 16.h),
-                          )),
-                    ),
-                    Text("Transaction",
-                        style: GoogleFonts.poppins(
-                            fontSize: 18.h, fontWeight: FontWeight.w400)),
-                    SizedBox(
-                      height: 20.h,
-                      width: 20.w,
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 30.h),
-                child: Container(
-                  height: 56.h,
-                  width: 56.h,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Utils.kTransactionLogoColor),
-                  child: Center(
-                    child: CustomPaint(
-                      size: const Size(17, 16),
-                      painter: TransactionIconPainter(),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 18),
-                child: Text(
-                  dateText,
-                  style: GoogleFonts.poppins(
-                      fontSize: 14.h,
-                      color: Utils.kSingleTransactionDateColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 23.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 32.h,
-                      width: 66.w,
-                    ),
-                    Text(
-                      moneyText,
-                      style: GoogleFonts.poppins(
-                          fontSize: 24.h,
-                          fontWeight: FontWeight.w700,
-                          color: Utils.kSingleTransactionMoneyColor),
-                    ),
-                    Container(
-                      height: 32.h,
-                      width: 66.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(48),
-                          color: Utils.kHeaderCurrencyButtonColor),
-                      child: Center(
-                        child: Text(
-                          "USD",
-                          style: GoogleFonts.poppins(
-                              fontSize: 16.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kHeaderCurrencyButtonTextColor),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 28.w, right: 28.w, bottom: 11.h),
-                child: SizedBox(
-                  height: 131.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Image(
-                            image: AssetImage(logoPath),
-                          ),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              CustomPaint(
-                                size: const Size(9, 13),
-                                painter: AttachIconPainter(),
-                              ),
-                              SizedBox(width: 13.w),
-                              CustomPaint(
-                                size: const Size(11, 14),
-                                painter: LocationIconPainter(),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                              width: 35,
-                              child: Divider(
-                                color: Utils.kSingleTransactionDividerColor,
-                              ))
-                        ],
-                      ),
-                      Container(
-                        height: 131.h,
-                        width: 219.w,
-                        decoration: BoxDecoration(
-                            color: Utils.kSingleTransactionDescriptionBoxColor,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 12.h, bottom: 12, left: 24.w, right: 24.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Description",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12.h,
-                                    fontWeight: FontWeight.w600,
-                                    color: Utils
-                                        .kSingleTransactionDescriptionTitleColor),
-                              ),
-                              SizedBox(height: 16.h),
-                              Text(
-                                descriptionText,
-                                style: GoogleFonts.poppins(
-                                    fontSize: 14.h,
-                                    fontWeight: FontWeight.w500,
-                                    color: Utils
-                                        .kSingleTransactionDescriptionTextColor),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 11.h),
-                child: Container(
-                  height: 58.h,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: Utils.kSingleTransactionCreditCardButtonColor,
-                      borderRadius: BorderRadius.circular(6)),
-                  child: Center(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.white),
-                            child: Center(
-                              child: CustomPaint(
-                                size: const Size(24, 24),
-                                painter: CreditCardIconPainter(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Text(
-                            "Credit Card",
-                            style: GoogleFonts.poppins(
-                                fontSize: 12.h,
-                                fontWeight: FontWeight.w700,
-                                color: Utils
-                                    .kSingleTransactionCreditCardButtonTextColor),
-                          )
-                        ]),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 30.w, right: 30.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 65.5,
-                          decoration: BoxDecoration(
-                              color: Utils.kSingleTransactionButtonColor,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: const Center(
-                            child: Icon(
-                              Icons.folder_rounded,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10.w),
-                        Text(
-                          "Business",
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kSingleTransactionButtonTextColor),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 65.5,
-                          decoration: BoxDecoration(
-                              color: Utils.kSingleTransactionButtonColor,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Center(
-                              child: CustomPaint(
-                            size: const Size(15, 20),
-                            painter: FoodIconPainter(),
-                          )),
-                        ),
-                        SizedBox(height: 10.w),
-                        Text(
-                          "Food",
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kSingleTransactionButtonTextColor),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 65.5,
-                          decoration: BoxDecoration(
-                              color: Utils.kSingleTransactionButtonColor,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Center(
-                              child: CustomPaint(
-                            size: const Size(16, 20),
-                            painter: EatOutIconPainter(),
-                          )),
-                        ),
-                        SizedBox(height: 10.w),
-                        Text(
-                          "Eat Out",
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kSingleTransactionButtonTextColor),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 65.5,
-                          decoration: BoxDecoration(
-                              color: Utils.kSingleTransactionButtonColor,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Center(
-                              child: Image.asset("assets/deliveroo_icon.png")),
-                        ),
-                        SizedBox(height: 10.w),
-                        Text(
-                          "Deliveroo",
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.h,
-                              fontWeight: FontWeight.w700,
-                              color: Utils.kSingleTransactionButtonTextColor),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(left: 23.w, right: 23.w, bottom: 20.h),
-            child: SizedBox(
-              width: 330.w,
-              height: 77.h,
+    ScreenUtil.init(context);
+    return Scaffold(
+        backgroundColor: Utils.kBackgroundColor,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  top: 55.h, left: 24.w, right: 24.w, bottom: 25.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 46.h,
-                        width: 46.w,
-                        decoration: BoxDecoration(
-                            color: Utils
-                                .kSingleTransactionBottomBarEditButtonColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.kCircularButtonBorderColor,
-                            )),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                        height: 20.h,
+                        width: 20.w,
+                        color: Colors.transparent,
                         child: Center(
-                            child: CustomPaint(
-                          size: const Size(17, 18),
-                          painter: EditIconPainter(),
+                          child: Icon(Icons.arrow_back_ios, size: 16.h),
                         )),
-                      ),
-                      Text(
-                        "Edit",
-                        style: GoogleFonts.poppins(
-                            fontSize: 12.h,
-                            fontWeight: FontWeight.w500,
-                            color: Utils.kSingleTransactionBottomBarTextColor),
-                      )
-                    ],
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 46.h,
-                        width: 46.w,
-                        decoration: BoxDecoration(
-                            color: Utils
-                                .kSingleTransactionBottomBarRefundButtonColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.kCircularButtonBorderColor,
-                            )),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(17, 19),
-                          painter: RefundIconPainter(),
-                        )),
-                      ),
-                      Text(
-                        "Refund",
-                        style: GoogleFonts.poppins(
-                            fontSize: 12.h,
-                            fontWeight: FontWeight.w500,
-                            color: Utils.kSingleTransactionBottomBarTextColor),
-                      )
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 46.h,
-                        width: 46.w,
-                        decoration: BoxDecoration(
-                            color: Utils
-                                .kSingleTransactionBottomBarDeleteButtonColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.kCircularButtonBorderColor,
-                            )),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(16, 20),
-                          painter: DeleteIconPainter(),
-                        )),
-                      ),
-                      Text(
-                        "Delete",
-                        style: GoogleFonts.poppins(
-                            fontSize: 12.h,
-                            fontWeight: FontWeight.w500,
-                            color: Utils.kSingleTransactionBottomBarTextColor),
-                      )
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 46.h,
-                        width: 46.w,
-                        decoration: BoxDecoration(
-                            color: Utils
-                                .kSingleTransactionBottomBarFlagButtonColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.kCircularButtonBorderColor,
-                            )),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(15, 18),
-                          painter: FlagIconPainter(),
-                        )),
-                      ),
-                      Text(
-                        "Flag",
-                        style: GoogleFonts.poppins(
-                            fontSize: 12.h,
-                            fontWeight: FontWeight.w500,
-                            color: Utils.kSingleTransactionBottomBarTextColor),
-                      )
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 46.h,
-                        width: 46.w,
-                        decoration: BoxDecoration(
-                            color: Utils
-                                .kSingleTransactionBottomBarMomentButtonColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.kCircularButtonBorderColor,
-                            )),
-                        child: Center(
-                            child: CustomPaint(
-                          size: const Size(22, 22),
-                          painter: MomentIconPainter(),
-                        )),
-                      ),
-                      Text(
-                        "Moment",
-                        style: GoogleFonts.poppins(
-                            fontSize: 12.h,
-                            fontWeight: FontWeight.w500,
-                            color: Utils.kSingleTransactionBottomBarTextColor),
-                      )
-                    ],
+                  Text("Transaction",
+                      style: GoogleFonts.poppins(
+                          fontSize: 18.h, fontWeight: FontWeight.w400)),
+                  SizedBox(
+                    height: 20.h,
+                    width: 20.w,
                   )
                 ],
               ),
             ),
-          ));
-    });
+            Padding(
+              padding: EdgeInsets.only(bottom: 30.h),
+              child: Container(
+                height: 56.h,
+                width: 56.w,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle, color: Utils.kTransactionLogoColor),
+                child: Center(
+                  child: CustomPaint(
+                    size: Size(17.w, 16.h),
+                    painter: TransactionIconPainter(),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 18.h),
+              child: Text(
+                dateText,
+                style: GoogleFonts.poppins(
+                    fontSize: 14.h,
+                    color: Utils.kSingleTransactionDateColor,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 23.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 32.h,
+                    width: 66.w,
+                  ),
+                  Text(
+                    moneyText,
+                    style: GoogleFonts.poppins(
+                        fontSize: 24.h,
+                        fontWeight: FontWeight.w700,
+                        color: Utils.kSingleTransactionMoneyColor),
+                  ),
+                  Container(
+                    height: 32.h,
+                    width: 66.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(48.sp),
+                        color: Utils.kHeaderCurrencyButtonColor),
+                    child: Center(
+                      child: Text(
+                        "USD",
+                        style: GoogleFonts.poppins(
+                            fontSize: 16.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kHeaderCurrencyButtonTextColor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 28.w, right: 28.w, bottom: 11.h),
+              child: SizedBox(
+                height: 131.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Image(
+                          image: AssetImage(logoPath),
+                        ),
+                        const Spacer(),
+                        Row(
+                          children: [
+                            CustomPaint(
+                              size: Size(9.w, 13.h),
+                              painter: AttachIconPainter(),
+                            ),
+                            SizedBox(width: 13.w),
+                            CustomPaint(
+                              size: Size(11.w, 14.h),
+                              painter: LocationIconPainter(),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                            width: 35.w,
+                            child: Divider(
+                              color: Utils.kSingleTransactionDividerColor,
+                            ))
+                      ],
+                    ),
+                    Container(
+                      height: 131.h,
+                      width: 219.w,
+                      decoration: BoxDecoration(
+                          color: Utils.kSingleTransactionDescriptionBoxColor,
+                          borderRadius: BorderRadius.circular(10.sp)),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 12.h, bottom: 12, left: 24.w, right: 24.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Description",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 12.h,
+                                  fontWeight: FontWeight.w600,
+                                  color: Utils
+                                      .kSingleTransactionDescriptionTitleColor),
+                            ),
+                            SizedBox(height: 16.h),
+                            Text(
+                              descriptionText,
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14.h,
+                                  fontWeight: FontWeight.w500,
+                                  color: Utils
+                                      .kSingleTransactionDescriptionTextColor),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 11.h),
+              child: Container(
+                height: 58.h,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Utils.kSingleTransactionCreditCardButtonColor,
+                    borderRadius: BorderRadius.circular(6.sp)),
+                child: Center(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 40.h,
+                          width: 40.w,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: Center(
+                            child: CustomPaint(
+                              size: Size(24.w, 24.h),
+                              painter: CreditCardIconPainter(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        Text(
+                          "Credit Card",
+                          style: GoogleFonts.poppins(
+                              fontSize: 12.h,
+                              fontWeight: FontWeight.w700,
+                              color: Utils
+                                  .kSingleTransactionCreditCardButtonTextColor),
+                        )
+                      ]),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 30.w, right: 30.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.h,
+                        width: 65.5.w,
+                        decoration: BoxDecoration(
+                            color: Utils.kSingleTransactionButtonColor,
+                            borderRadius: BorderRadius.circular(6.sp)),
+                        child: Center(
+                          child: Icon(
+                            Icons.folder_rounded,
+                            color: Colors.white,
+                            size: 23.h,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "Business",
+                        style: GoogleFonts.poppins(
+                            fontSize: 10.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kSingleTransactionButtonTextColor),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.h,
+                        width: 65.5.w,
+                        decoration: BoxDecoration(
+                            color: Utils.kSingleTransactionButtonColor,
+                            borderRadius: BorderRadius.circular(6.sp)),
+                        child: Center(
+                            child: CustomPaint(
+                          size: Size(15.w, 20.h),
+                          painter: FoodIconPainter(),
+                        )),
+                      ),
+                      SizedBox(height: 10.w),
+                      Text(
+                        "Food",
+                        style: GoogleFonts.poppins(
+                            fontSize: 10.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kSingleTransactionButtonTextColor),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.h,
+                        width: 65.5.w,
+                        decoration: BoxDecoration(
+                            color: Utils.kSingleTransactionButtonColor,
+                            borderRadius: BorderRadius.circular(6.sp)),
+                        child: Center(
+                            child: CustomPaint(
+                          size: Size(16.w, 20.h),
+                          painter: EatOutIconPainter(),
+                        )),
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "Eat Out",
+                        style: GoogleFonts.poppins(
+                            fontSize: 10.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kSingleTransactionButtonTextColor),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 50.h,
+                        width: 65.5.w,
+                        decoration: BoxDecoration(
+                            color: Utils.kSingleTransactionButtonColor,
+                            borderRadius: BorderRadius.circular(6.sp)),
+                        child: Center(
+                            child: Image.asset("assets/deliveroo_icon.png")),
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "Deliveroo",
+                        style: GoogleFonts.poppins(
+                            fontSize: 10.h,
+                            fontWeight: FontWeight.w700,
+                            color: Utils.kSingleTransactionButtonTextColor),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(left: 23.w, right: 23.w, bottom: 20.h),
+          child: SizedBox(
+            width: 330.w,
+            height: 77.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 46.h,
+                      width: 46.w,
+                      decoration: BoxDecoration(
+                          color:
+                              Utils.kSingleTransactionBottomBarEditButtonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Utils.kCircularButtonBorderColor,
+                          )),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(17.w, 18.h),
+                        painter: EditIconPainter(),
+                      )),
+                    ),
+                    Text(
+                      "Edit",
+                      style: GoogleFonts.poppins(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Utils.kSingleTransactionBottomBarTextColor),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 46.h,
+                      width: 46.w,
+                      decoration: BoxDecoration(
+                          color: Utils
+                              .kSingleTransactionBottomBarRefundButtonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Utils.kCircularButtonBorderColor,
+                          )),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(17.w, 19.h),
+                        painter: RefundIconPainter(),
+                      )),
+                    ),
+                    Text(
+                      "Refund",
+                      style: GoogleFonts.poppins(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Utils.kSingleTransactionBottomBarTextColor),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 46.h,
+                      width: 46.w,
+                      decoration: BoxDecoration(
+                          color: Utils
+                              .kSingleTransactionBottomBarDeleteButtonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Utils.kCircularButtonBorderColor,
+                          )),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(16.w, 20.h),
+                        painter: DeleteIconPainter(),
+                      )),
+                    ),
+                    Text(
+                      "Delete",
+                      style: GoogleFonts.poppins(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Utils.kSingleTransactionBottomBarTextColor),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 46.h,
+                      width: 46.w,
+                      decoration: BoxDecoration(
+                          color:
+                              Utils.kSingleTransactionBottomBarFlagButtonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Utils.kCircularButtonBorderColor,
+                          )),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(15.w, 18.h),
+                        painter: FlagIconPainter(),
+                      )),
+                    ),
+                    Text(
+                      "Flag",
+                      style: GoogleFonts.poppins(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Utils.kSingleTransactionBottomBarTextColor),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 46.h,
+                      width: 46.w,
+                      decoration: BoxDecoration(
+                          color: Utils
+                              .kSingleTransactionBottomBarMomentButtonColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Utils.kCircularButtonBorderColor,
+                          )),
+                      child: Center(
+                          child: CustomPaint(
+                        size: Size(22.w, 22.h),
+                        painter: MomentIconPainter(),
+                      )),
+                    ),
+                    Text(
+                      "Moment",
+                      style: GoogleFonts.poppins(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Utils.kSingleTransactionBottomBarTextColor),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
 

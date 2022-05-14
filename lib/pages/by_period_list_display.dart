@@ -71,21 +71,18 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
   final String spendingDate = "Mar 22";
   final double bottomTimePickingLargeWidth = 77.w;
   final double bottomTimePickingSmallWidth = 57.w;
-  
 
   ExpenseIncomePick _selectedEI = ExpenseIncomePick.expense;
   BottomBarTimePick _selectedTime = BottomBarTimePick.d;
 
-
-
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(builder: (context) {
-      return Scaffold(
+    ScreenUtil.init(context);
+    return Scaffold(
         backgroundColor: Utils.kBackgroundColor,
         floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         floatingActionButton: SizedBox(
-          width: 44.h,
+          width: 44.w,
           height: 44.h,
           child: FittedBox(
             child: FloatingActionButton(
@@ -139,10 +136,10 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                 width: 309.w,
                 decoration: BoxDecoration(
                     color: Utils.kSearchBarColor,
-                    borderRadius: BorderRadius.circular(6)),
+                    borderRadius: BorderRadius.circular(6.sp)),
                 child: Row(children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:  EdgeInsets.all(8.0.h),
                     child: Icon(
                       Icons.search,
                       color: Utils.kSearchBarTextColor,
@@ -160,7 +157,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding:  EdgeInsets.only(top: 20.h),
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Column(
@@ -189,7 +186,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                         ),
                          SizedBox(width: 5.w),
                         CustomPaint(
-                          size: const Size(15, 13),
+                          size:  Size(15.w, 13.h),
                           painter: BagIconPainter(),
                         )
                       ],
@@ -197,7 +194,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding:  EdgeInsets.only(left: 10.w),
                   child: SizedBox(
                     height: 150.h,
                     width: 150.h,
@@ -228,13 +225,13 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                 children: [
                   Container(
                     height: 40.h,
-                    width: 40.h,
+                    width: 40.w,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Utils.kCircularButtonAccentColor,
                         border: Border.all(
                             color: Utils.kCircularButtonBorderColor,
-                            width: 0.5)),
+                            width: 0.5.w)),
                     child: const Icon(
                       Icons.signal_cellular_alt_rounded,
                       color: Utils.kCirculatButtonIconColor,
@@ -243,49 +240,49 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                   SizedBox(width: 10.w),
                   Container(
                       height: 40.h,
-                      width: 40.h,
+                      width: 40.w,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Utils.kCircularButtonAccentColor,
                           border: Border.all(
                               color: Utils.kCircularButtonBorderColor,
-                              width: 0.5)),
+                              width: 0.5.w)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                           Icon(
                             Icons.watch_later,
                             color: Utils.kCirculatButtonIconColor,
-                            size: 11,
+                            size: 11.h,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding:  EdgeInsets.all(2.0.h),
                             child: Container(
-                              height: 1,
-                              width: 25,
+                              height: 1.h,
+                              width: 25.w,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(1),
+                                borderRadius: BorderRadius.circular(1.sp),
                               ),
                             ),
                           ),
-                          const Icon(
+                           Icon(
                             Icons.bookmark,
                             color: Utils.kCirculatButtonIconColor,
-                            size: 11,
+                            size: 11.h,
                           )
                         ],
                       )),
                   SizedBox(width: 10.w),
                   Container(
                     height: 40.h,
-                    width: 40.h,
+                    width: 40.w,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Utils.kCircularButtonAccentColor,
                         border: Border.all(
                             color: Utils.kCircularButtonBorderColor,
-                            width: 0.5)),
+                            width: 0.5.w)),
                     child: const Icon(
                       Icons.menu_rounded,
                       color: Color(0xffFE7886),
@@ -295,13 +292,13 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                   SizedBox(width: 10.w),
                   Container(
                     height: 40.h,
-                    width: 40.h,
+                    width: 40.w,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Utils.kCircularButtonAccentColor,
                         border: Border.all(
                             color: Utils.kCircularButtonBorderColor,
-                            width: 0.5)),
+                            width: 0.5.w)),
                     child: const Icon(
                       Icons.cloud_download_rounded,
                       color: Utils.kCirculatButtonIconColor,
@@ -353,7 +350,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                       height: 28.h,
                       width: 118.5.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.sp),
                         color: _selectedEI == ExpenseIncomePick.expense
                             ? Utils.kBottomBarExpenseIncomeSelectedColor
                             : Utils.kBottomBarExpenseIncomeUnselectedColor,
@@ -384,7 +381,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
                       height: 28.h,
                       width: 118.5.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.sp),
                         color: _selectedEI == ExpenseIncomePick.income
                             ? Utils.kBottomBarExpenseIncomeSelectedColor
                             : Utils.kBottomBarExpenseIncomeUnselectedColor,
@@ -539,7 +536,7 @@ class _ByPeriodListDisplay extends State<ByPeriodListDisplay> {
           ),
         ),
       );
-    });
+    
   }
 }
 
@@ -568,9 +565,8 @@ class ListViewListItem extends StatelessWidget {
         children: [
           SizedBox(
             height: 17.h,
-            width: 17.h,
+            width: 17.w,
             child: CustomPaint(
-              //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
               painter: ClockIconPainter(clockIconFillColor: iconFillColor),
             ),
           ),
@@ -588,7 +584,7 @@ class ListViewListItem extends StatelessWidget {
                   height: 10.h,
                   width: 75.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1),
+                      borderRadius: BorderRadius.circular(1.sp),
                       border: Border.all(color: Colors.black)),
                   child: LinearProgressIndicator(
                     color: iconFillColor,
