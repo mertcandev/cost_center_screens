@@ -191,7 +191,7 @@ class _ListDisplayState extends State<ListDisplay> {
                       ),
                       SizedBox(width: 5.w),
                       CustomPaint(
-                        size:  Size(15.w, 13.h),
+                        size: Size(15.w, 13.h),
                         painter: BagIconPainter(),
                       )
                     ],

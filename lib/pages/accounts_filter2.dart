@@ -262,363 +262,384 @@ class _AccountsFilter2 extends State<AccountsFilter2> {
         context: context,
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
-            return Container(
-              height: 640.h,
-              width: 360.w,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16)),
-                  color: Utils.kModalSheetBackgroundColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 24.h, bottom: 16.h),
-                    child: SizedBox(
-                      height: 44.h,
-                      width: 360.w,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                height: 640.h,
+                width: 360.w,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16)),
+                    color: Utils.kModalSheetBackgroundColor),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 24.h, bottom: 16.h),
+                      child: SizedBox(
+                        height: 44.h,
+                        width: 360.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 18.w, top: 10.h, bottom: 10.h),
+                                child: SizedBox(
+                                  height: 24.h,
+                                  width: 24.w,
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.arrow_back_ios_new_rounded,
+                                    size: 12.h,
+                                  )),
+                                ),
+                              ),
+                            ),
+                            Text("Edit Center",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18.h,
+                                    color: Utils.kModalSheetTextColor,
+                                    fontWeight: FontWeight.w400)),
+                            Padding(
+                              padding: EdgeInsets.only(right: 18.w),
+                              child: SizedBox(height: 24.h, width: 24.w),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 56.h,
+                      width: 56.w,
+                      decoration: const BoxDecoration(
+                          color: Utils.kAccountFilterEditModalSheetIconColor,
+                          shape: BoxShape.circle),
+                      child: Center(
+                        child: Icon(
+                          Icons.border_color_rounded,
+                          size: 20.h,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16.h, left: 24.w),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 18.w, top: 10.h, bottom: 10.h),
-                              child: SizedBox(
-                                height: 24.h,
-                                width: 24.w,
-                                child: Center(
-                                    child: Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  size: 12.h,
-                                )),
+                          Text(
+                            "Center Name",
+                            style: GoogleFonts.poppins(
+                                fontSize: 12.h,
+                                fontWeight: FontWeight.w400,
+                                color: Utils
+                                    .kAccountFilterEditModalSheetTextColor),
+                          ),
+                          SizedBox(height: 6.h),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 38.h),
+                            child: Container(
+                              width: 313.w,
+                              height: 48.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.sp),
+                                  border: Border.all(
+                                      color: Utils
+                                          .kAccountFilterEditModalSheetTextFieldColor)),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      style: GoogleFonts.inter(
+                                          fontSize: 16.h,
+                                          fontWeight: FontWeight.w600,
+                                          color:
+                                              Utils.kModalSheetSearchTextColor),
+                                      showCursor: false,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            EdgeInsets.only(left: 15.w),
+                                        border: InputBorder.none,
+                                        hintText: "Personal",
+                                        hintStyle: GoogleFonts.inter(
+                                            fontSize: 16.h,
+                                            fontWeight: FontWeight.w400,
+                                            color: Utils
+                                                .kModalSheetSearchTextColor),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                          Text("Edit Center",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18.h,
-                                  color: Utils.kModalSheetTextColor,
-                                  fontWeight: FontWeight.w400)),
-                          Padding(
-                            padding: EdgeInsets.only(right: 18.w),
-                            child: SizedBox(height: 24.h, width: 24.w),
-                          )
+                          Text(
+                            "Select Center Purpose",
+                            style: GoogleFonts.poppins(
+                                fontSize: 12.h,
+                                fontWeight: FontWeight.w400,
+                                color: Utils
+                                    .kAccountFilterEditModalSheetTextColor),
+                          ),
+                          SizedBox(height: 18.h),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPurpose = PurposePick.cost;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      height: 20.h,
+                                      width: 20.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xff5BEFBD)
+                                            .withOpacity(0.5),
+                                      ),
+                                      child: Visibility(
+                                          visible: _selectedPurpose ==
+                                                  PurposePick.cost
+                                              ? true
+                                              : false,
+                                          child: Center(
+                                            child: Container(
+                                              height: 16.h,
+                                              width: 16.w,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xff5BEFBD),
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  height: 7.h,
+                                                  width: 7.w,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "Cost Center",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16.h,
+                                          fontWeight: FontWeight.w500,
+                                          color: Utils
+                                              .kAccountFilterEditCheckBoxTextColor),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 21.h),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPurpose = PurposePick.profit;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      height: 20.h,
+                                      width: 20.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xff5BEFBD)
+                                            .withOpacity(0.5),
+                                      ),
+                                      child: Visibility(
+                                          visible: _selectedPurpose ==
+                                                  PurposePick.profit
+                                              ? true
+                                              : false,
+                                          child: Center(
+                                            child: Container(
+                                              height: 16.h,
+                                              width: 16.w,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xff5BEFBD),
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  height: 7.h,
+                                                  width: 7.w,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "Profit Center",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16.h,
+                                          fontWeight: FontWeight.w500,
+                                          color: Utils
+                                              .kAccountFilterEditCheckBoxTextColor),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 21.h),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPurpose = PurposePick.generic;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      height: 20.h,
+                                      width: 20.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xff5BEFBD)
+                                            .withOpacity(0.5),
+                                      ),
+                                      child: Visibility(
+                                          visible: _selectedPurpose ==
+                                                  PurposePick.generic
+                                              ? true
+                                              : false,
+                                          child: Center(
+                                            child: Container(
+                                              height: 16.h,
+                                              width: 16.w,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xff5BEFBD),
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  height: 7.h,
+                                                  width: 7.w,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "Generic",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16.h,
+                                          fontWeight: FontWeight.w500,
+                                          color: Utils
+                                              .kAccountFilterEditCheckBoxTextColor),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 56.h,
-                    width: 56.w,
-                    decoration: const BoxDecoration(
-                        color: Utils.kAccountFilterEditModalSheetIconColor,
-                        shape: BoxShape.circle),
-                    child: Center(
-                      child: Icon(
-                        Icons.border_color_rounded,
-                        size: 20.h,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16.h, left: 24.w),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Center Name",
-                          style: GoogleFonts.poppins(
-                              fontSize: 12.h,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  Utils.kAccountFilterEditModalSheetTextColor),
-                        ),
-                        SizedBox(height: 6.h),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 38.h),
-                          child: Container(
-                            width: 313.w,
-                            height: 48.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.sp),
-                                border: Border.all(
-                                    color: Utils
-                                        .kAccountFilterEditModalSheetTextFieldColor)),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 15.w,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Personal",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 16.h,
-                                        fontWeight: FontWeight.w400,
-                                        color: Utils
-                                            .kAccountFilterEditModalSheetTextFieldTextColor),
+                    const Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 35.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 56.h,
+                                width: 56.w,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color:
+                                            Utils.kCircularButtonBorderColor),
+                                    shape: BoxShape.circle,
+                                    color: Utils.kDeleteButtonColor),
+                                child: Center(
+                                  child: CustomPaint(
+                                    size: Size(20.w, 24.h),
+                                    painter: DeleteIconPainter(),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                              SizedBox(height: 15.h),
+                              Text(
+                                "Delete",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 12.h,
+                                    fontWeight: FontWeight.w500,
+                                    color: Utils.kModalSheetTextColor),
+                              )
+                            ],
                           ),
-                        ),
-                        Text(
-                          "Select Center Purpose",
-                          style: GoogleFonts.poppins(
-                              fontSize: 12.h,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  Utils.kAccountFilterEditModalSheetTextColor),
-                        ),
-                        SizedBox(height: 18.h),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _selectedPurpose = PurposePick.cost;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(milliseconds: 500),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: const Color(0xff5BEFBD)
-                                          .withOpacity(0.5),
-                                    ),
-                                    child: Visibility(
-                                        visible:
-                                            _selectedPurpose == PurposePick.cost
-                                                ? true
-                                                : false,
-                                        child: Center(
-                                          child: Container(
-                                            height: 16.h,
-                                            width: 16.w,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff5BEFBD),
-                                            ),
-                                            child: Center(
-                                              child: Container(
-                                                height: 7.h,
-                                                width: 7.w,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
+                          SizedBox(width: 50.w),
+                          Column(
+                            children: [
+                              Container(
+                                height: 56.h,
+                                width: 56.w,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color:
+                                            Utils.kCircularButtonBorderColor),
+                                    shape: BoxShape.circle,
+                                    color: Utils.kSaveButtonColor),
+                                child: Center(
+                                  child: CustomPaint(
+                                    size: Size(23.w, 17.h),
+                                    painter: SaveIconPainter(),
                                   ),
-                                  SizedBox(width: 6.w),
-                                  Text(
-                                    "Cost Center",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 16.h,
-                                        fontWeight: FontWeight.w500,
-                                        color: Utils
-                                            .kAccountFilterEditCheckBoxTextColor),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 21.h),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _selectedPurpose = PurposePick.profit;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(milliseconds: 500),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: const Color(0xff5BEFBD)
-                                          .withOpacity(0.5),
-                                    ),
-                                    child: Visibility(
-                                        visible: _selectedPurpose ==
-                                                PurposePick.profit
-                                            ? true
-                                            : false,
-                                        child: Center(
-                                          child: Container(
-                                            height: 16.h,
-                                            width: 16.w,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff5BEFBD),
-                                            ),
-                                            child: Center(
-                                              child: Container(
-                                                height: 7.h,
-                                                width: 7.w,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                  SizedBox(width: 6.w),
-                                  Text(
-                                    "Profit Center",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 16.h,
-                                        fontWeight: FontWeight.w500,
-                                        color: Utils
-                                            .kAccountFilterEditCheckBoxTextColor),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 21.h),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _selectedPurpose = PurposePick.generic;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(milliseconds: 500),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: const Color(0xff5BEFBD)
-                                          .withOpacity(0.5),
-                                    ),
-                                    child: Visibility(
-                                        visible: _selectedPurpose ==
-                                                PurposePick.generic
-                                            ? true
-                                            : false,
-                                        child: Center(
-                                          child: Container(
-                                            height: 16.h,
-                                            width: 16.w,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff5BEFBD),
-                                            ),
-                                            child: Center(
-                                              child: Container(
-                                                height: 7.h,
-                                                width: 7.w,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                  SizedBox(width: 6.w),
-                                  Text(
-                                    "Generic",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 16.h,
-                                        fontWeight: FontWeight.w500,
-                                        color: Utils
-                                            .kAccountFilterEditCheckBoxTextColor),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 35.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 56.h,
-                              width: 56.w,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Utils.kCircularButtonBorderColor),
-                                  shape: BoxShape.circle,
-                                  color: Utils.kDeleteButtonColor),
-                              child: Center(
-                                child: CustomPaint(
-                                  size: Size(20.w, 24.h),
-                                  painter: DeleteIconPainter(),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 15.h),
-                            Text(
-                              "Delete",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12.h,
-                                  fontWeight: FontWeight.w500,
-                                  color: Utils.kModalSheetTextColor),
-                            )
-                          ],
-                        ),
-                        SizedBox(width: 50.w),
-                        Column(
-                          children: [
-                            Container(
-                              height: 56.h,
-                              width: 56.w,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Utils.kCircularButtonBorderColor),
-                                  shape: BoxShape.circle,
-                                  color: Utils.kSaveButtonColor),
-                              child: Center(
-                                child: CustomPaint(
-                                  size: Size(23.w, 17.h),
-                                  painter: SaveIconPainter(),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15.h),
-                            Text(
-                              "Save",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12.h,
-                                  fontWeight: FontWeight.w500,
-                                  color: Utils.kModalSheetTextColor),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                              SizedBox(height: 15.h),
+                              Text(
+                                "Save",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 12.h,
+                                    fontWeight: FontWeight.w500,
+                                    color: Utils.kModalSheetTextColor),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           });
@@ -660,6 +681,7 @@ class ListDisplayListCard extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.075,
                       width: MediaQuery.of(context).size.height * 0.075,
                       child: CustomPaint(
+                        size: Size(60.w, 60.h),
                         painter: AccountLogoPainter(),
                       ),
                     ),

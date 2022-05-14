@@ -176,6 +176,8 @@ class _AccountOverview3 extends State<AccountOverview3> {
                                   MediaQuery.of(context).size.height * 0.075,
                               width: MediaQuery.of(context).size.height * 0.075,
                               child: CustomPaint(
+                                size: Size(60.w, 60.h),
+
                                 painter: AccountLogoPainter(),
                               ),
                             ),
@@ -228,7 +230,7 @@ class _AccountOverview3 extends State<AccountOverview3> {
                                         .withOpacity(0.15)),
                                 child: Center(
                                     child: CustomPaint(
-                                  size: Size(18.w, 18.h),
+                                  size: Size(18, 18.h),
                                   painter: BagIconPainter(),
                                 ))),
                           ],

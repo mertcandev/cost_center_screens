@@ -37,6 +37,7 @@ class _AccountsFilter extends State<AccountsFilter> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       extendBody: false,
       backgroundColor: Utils.kBackgroundColor,
       body: Column(
@@ -150,7 +151,7 @@ class _AccountsFilter extends State<AccountsFilter> {
                               color: Utils.kBackgroundColor,
                               borderRadius: BorderRadius.circular(20.sp),
                               border: Border.all(
-                                  color: Utils.kAccountCardColor, width: 2)),
+                                  color: Utils.kAccountCardColor, width: 2.w)),
                           child: Center(
                               child: SizedBox(
                             height: 30.h,
@@ -261,145 +262,168 @@ class _AccountsFilter extends State<AccountsFilter> {
                 topLeft: Radius.circular(16), topRight: Radius.circular(16))),
         context: context,
         builder: (context) {
-          return Container(
-            height: 444.h,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16)),
-                color: Utils.kModalSheetBackgroundColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(24.h),
-                        child: Text(
-                          "Select Category",
-                          style: GoogleFonts.poppins(
-                              fontSize: 24.h,
-                              fontWeight: FontWeight.w600,
-                              color: Utils.kModalSheetTextColor),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: 24.w, left: 24.w, bottom: 16.h),
-                        child: Container(
-                          height: 36.h,
-                          width: 327.w,
-                          decoration: BoxDecoration(
-                            color: Utils.kModalSheetSearchBarColor,
-                            borderRadius: BorderRadius.circular(8.sp),
+          return SingleChildScrollView(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              height: 444.h,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16)),
+                  color: Utils.kModalSheetBackgroundColor),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(24.h),
+                          child: Text(
+                            "Select Category",
+                            style: GoogleFonts.poppins(
+                                fontSize: 24.h,
+                                fontWeight: FontWeight.w600,
+                                color: Utils.kModalSheetTextColor),
                           ),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.w),
-                                  child: Icon(Icons.search_rounded,
-                                      color: Utils.kModalSheetSearchIconColor,
-                                      size: 12.h),
-                                ),
-                                Text(
-                                  "Search",
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16.h,
-                                      fontWeight: FontWeight.w400,
-                                      color: Utils.kModalSheetSearchTextColor),
-                                )
-                              ]),
                         ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 24.w, right: 24.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 56.h,
-                                  width: 310.w,
-                                  child: Text(
-                                    accountFilterText1,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18.h,
-                                        fontWeight: FontWeight.w400),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: 24.w, left: 24.w, bottom: 16.h),
+                          child: Container(
+                            height: 36.h,
+                            width: 327.w,
+                            decoration: BoxDecoration(
+                              color: Utils.kModalSheetSearchBarColor,
+                              borderRadius: BorderRadius.circular(8.sp),
+                            ),
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10.w),
+                                    child: Icon(Icons.search_rounded,
+                                        color: Utils.kModalSheetSearchIconColor,
+                                        size: 12.h),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 56.h,
-                                  width: 310.w,
-                                  child: Text(
-                                    accountFilterText2,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18.h,
-                                        fontWeight: FontWeight.w400),
+                                  Flexible(
+                                    child: TextField(
+                                      style: GoogleFonts.inter(
+                                          fontSize: 16.h,
+                                          fontWeight: FontWeight.w600,
+                                          color:
+                                              Utils.kModalSheetSearchTextColor),
+                                      showCursor: false,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "Search",
+                                        hintStyle: GoogleFonts.inter(
+                                            fontSize: 16.h,
+                                            fontWeight: FontWeight.w400,
+                                            color: Utils
+                                                .kModalSheetSearchTextColor),
+                                      ),
+                                    ),
+                                  )
+                                  /* Text(
+                                    "Search",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 16.h,
+                                        fontWeight: FontWeight.w400,
+                                        color: Utils.kModalSheetSearchTextColor),
+                                  ) */
+                                ]),
+                          ),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 24.w, right: 24.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 56.h,
+                                    width: 310.w,
+                                    child: Text(
+                                      accountFilterText1,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18.h,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 310.w,
-                                  height: 56.h,
-                                  child: Text(
-                                    accountFilterText3,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18.h,
-                                        fontWeight: FontWeight.w400),
+                                  SizedBox(
+                                    height: 56.h,
+                                    width: 310.w,
+                                    child: Text(
+                                      accountFilterText2,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18.h,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 310.w,
-                                  height: 56.h,
-                                  child: Text(
-                                    accountFilterText4,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18.h,
-                                        fontWeight: FontWeight.w400),
+                                  SizedBox(
+                                    width: 310.w,
+                                    height: 56.h,
+                                    child: Text(
+                                      accountFilterText3,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18.h,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    width: 310.w,
+                                    height: 56.h,
+                                    child: Text(
+                                      accountFilterText4,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18.h,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 75.h,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              top: BorderSide(
-                                  color: Utils.kModalSheetDividerColor))),
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Text(
-                          "Cancel",
-                          style: GoogleFonts.poppins(
-                              fontSize: 16.h,
-                              fontWeight: FontWeight.w500,
-                              color: Utils.kModalSheetCancelButtonTextColor),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 75.h,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                top: BorderSide(
+                                    color: Utils.kModalSheetDividerColor))),
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                          child: Text(
+                            "Cancel",
+                            style: GoogleFonts.poppins(
+                                fontSize: 16.h,
+                                fontWeight: FontWeight.w500,
+                                color: Utils.kModalSheetCancelButtonTextColor),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         });
@@ -440,6 +464,8 @@ class ListDisplayListCard extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.075,
                       width: MediaQuery.of(context).size.height * 0.075,
                       child: CustomPaint(
+                                size: Size(60.w, 60.h),
+
                         painter: AccountLogoPainter(),
                       ),
                     ),
